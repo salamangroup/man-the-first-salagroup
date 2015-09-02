@@ -5,6 +5,7 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 22
     buildToolsVersion "23.0.0"
 
