@@ -1,0 +1,95 @@
+Organizing Your Android Development Code Structure
+
+1.Java Code:
+
+•Cấu trúc theo từng package:
+
+    •activities: chứa tất cả các Activity, đặt tên class với Activity cuối cùng.
+
+    •adapter: chứa tất cả adapter. Đặt tên ứng với loại adapter, hoặc chức năng của adapter đó, tên class kết thúc bằng Adapter.
+
+    •authenticator: chứa các class liên quan đến việc login/logout; tạo tài khoản local,…
+
+    •pojo: Chứa tất cả các đối tượng được sử dụng, tên thể hiện dc nội dung của đối tượng đó.
+
+    •model: Model cho từng đối tượng.
+
+    •fragment: Chứa tất cả java code của từng fragment được sử dụng, đặt tên kết thúc bằng Fragment.
+
+    •interface( nếu cần ): chứa tất cả interface.
+
+    •sync: chứa tất cả các class liên quan đến đồng bộ dữ liệu với Webservice.
+
+    •data: Chứa tất cả các class trong việc giao tiếp với CSDL, SQLiteHelper, ContentProvider,….Thường thì các class này sẽ extend từ các class có sẵn.
+
+    •constant: chứa tất cả các khai báo hằng.
+
+    •system: Chứa các class trong phần xử lý các dịch vụ hệ thống, làm việc với Service, BroadcastReceiver,….
+
+2.Layouts: Không được tạo folders
+
+•Đặt tên:
+
+    •activity_
+
+    •adapter_ => layout của 1 item
+
+    •fragment_
+
+    •view_
+
+    •custom_ => custom spinner, listview,.....
+
+    •navigation_header
+
+3.Menu: Không tạo được folders
+
+    •Đặt tên theo: menu_ ( VD: main_menu, navigation_menu; … )
+
+4.Values:
+
+•Tổ chức thành các file riêng biệt cho từng chức năng:
+
+    •arrays
+
+    •attrs: tham chiếu đến các thuộc tính
+
+    •bools
+
+    •colors => mã màu =>đặt tên theo tên 8 màu của Material Design. VD: colorPrimary/ colorAccent
+
+    •dimens => [view]_[tên view / func]_[padding/margin]_[left/right/top/bottom] => btn_login_margin_top
+
+    •drawables
+
+    •ids
+
+    •integers => vd: num_of_columns
+
+    •publics
+
+    •styles
+
+    •strings: tùy vào view, chức năng mà đặt tên, vd: btn_login_facebook, delete_all_email,…..
+
+                tv => textview
+
+                btn => button
+
+                imv => imageView
+
+            [view]_[func]_[all]
+
+            btn_login_with_facebook / btn_delete_item / btn_delete_all
+
+5.Drawable:
+
+•shape, rectangle => set màu nền, tham chiếu đến @colors/mã màu. đặt tên:
+
+6.color:
+
+7.amin
+
+    •activity_fade_out
+
+    •fragment
