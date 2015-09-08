@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String URL_LOADIMAGE = "http://54.255.214.47/api/product/getimage";
     private ArrayList<String> strImageLists = new ArrayList<>();
     private LoadImageAdapter adapter;
+    private String test="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
