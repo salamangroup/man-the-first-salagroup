@@ -1,0 +1,138 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:isScrollContainer="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.salagroup.salaman.activities.StoreInfoActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/store_info_item_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#33b5e5" />
+
+        <EditText
+            android:id="@+id/edtTenCuaHang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/store_info_item_shop_name" />
+
+        <EditText
+            android:id="@+id/edtSoDTGiaoDich"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/store_info_item_contact_number" />
+
+        <View style="@style/Divider" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="@string/store_info_item_store_adress"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#33b5e5" />
+
+        <Spinner
+            android:id="@+id/spnTinhThanh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/activity_horizontal_margin" />
+
+        <Spinner
+            android:id="@+id/spnQuanHuyen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/activity_horizontal_margin" />
+
+        <EditText
+            android:id="@+id/edtDiaChi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/store_info_item_address"
+            android:inputType="textMultiLine"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin" />
+
+        <View style="@style/Divider" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="@string/store_info_item_working_hours"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#33b5e5" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/store_info_item_working_hours_example"
+            android:inputType="textMultiLine"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin" />
+
+        <View style="@style/Divider" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="@string/store_info_item_stuff_type"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#33b5e5" />
+
+        <CheckBox
+            android:id="@+id/ckbThucPham"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/store_info_item_food" />
+
+        <CheckBox
+            android:id="@+id/ckbThoiTrang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/store_info_item_fashion" />
+
+        <CheckBox
+            android:id="@+id/ckbCongNghe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/store_info_item_technology" />
+
+        <TextView
+            android:id="@+id/tvNganhKhac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/store_info_item_other_types"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/store_info_item_update" />
+
+
+    </LinearLayout>
+
+</ScrollView>
