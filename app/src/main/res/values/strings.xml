@@ -13,7 +13,7 @@
     <string name="store_info_item_store_adress">Địa chỉ cửa hàng:</string>
     <string name="store_info_item_working_hours">Thời gian làm việc</string>
     <string name="store_info_item_working_hours_example">VD:\n\t\tT2&#8211;T6:\t\t8h00&#8211;12h00\n\t\t\t\t\t\t\t\t\t13h00&#8211;18h00\n\t\tT7:\t\t\t\t\t8h00&#8211;12h00\n\t\tCN và ngày lễ nghỉ</string>
-    <string name="store_info_item_stuff_type">Ngành hàng:</string>
+    <string name="store_info_item_product_type">Ngành hàng:</string>
     <string name="store_info_item_food">Thực Phẩm</string>
     <string name="store_info_item_fashion">Thời Trang</string>
     <string name="store_info_item_technology">Công Nghệ</string>
@@ -23,5 +23,21 @@
     <string name="store_info_item_mummy_baby"><![CDATA[Mẹ & Bé]]></string>
     <string name="store_info_item_other_types"><u>Ngành khác</u></string>
     <string name="store_info_item_update">Cập nhật</string>
+
+    <string name="title_activity_main_screen">MainScreenActivity</string>
+    <string name="main_screen_items_account_info">Thông tin tài khoản</string>
+    <string name="main_screen_items_store_info">Thông tin cửa hàng</string>
+    <string name="main_screen_items_selling">Bán hàng</string>
+    <string name="main_screen_items_report">Báo cáo</string>
+    <string name="main_screen_items_category">Danh mục</string>
+    <string name="main_screen_items_product_group">Nhóm sản phẩm</string>
+    <string name="main_screen_items_product">Sản Phẩm</string>
+    <string name="main_screen_items_customer_group">Nhóm khách hàng</string>
+    <string name="main_screen_items_customer">Khách hàng</string>
+    <string name="main_screen_items_buying">Mua hàng</string>
+    <string name="main_screen_items_buying_history">Lịch sử mua hàng</string>
+    <string name="main_screen_items_lookup">Tra cứu</string>
+    <string name="main_screen_items_QA"><![CDATA[Q & A]]></string>
+    <string name="main_screen_items_favorites">Yêu thích</string>
 
 </resources>
