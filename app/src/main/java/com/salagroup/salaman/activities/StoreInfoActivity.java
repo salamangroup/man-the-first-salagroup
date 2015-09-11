@@ -99,7 +99,7 @@ public class StoreInfoActivity extends AppCompatActivity implements View.OnClick
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(StoreInfoActivity.this);
                 builder.setView(mDialog)
-                        .setTitle("Show times repeat on...")
+                        .setTitle(R.string.store_info_item_other_types)
                         .setPositiveButton("Ok", null)
                         .show();
             }
