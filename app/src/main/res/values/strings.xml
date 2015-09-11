@@ -21,7 +21,7 @@
     <string name="store_info_item_office">Văn Phòng Phẩm</string>
     <string name="store_info_item_book">Sách</string>
     <string name="store_info_item_mummy_baby"><![CDATA[Mẹ & Bé]]></string>
-    <string name="store_info_item_other_types"><u>ngành khác</u></string>
+    <string name="store_info_item_other_types"><u>Ngành khác</u></string>
     <string name="store_info_item_update">Cập nhật</string>
 
 </resources>
