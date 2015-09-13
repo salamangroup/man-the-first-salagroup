@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@string/main_screen_items_account_info"
+                android:text="@string/main_screen_item_account_info"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <View
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@string/main_screen_items_store_info"
+                android:text="@string/main_screen_item_store_info"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <View
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@string/main_screen_items_selling"
+                android:text="@string/main_screen_item_selling"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <View
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@string/main_screen_items_report"
+                android:text="@string/main_screen_item_report"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <View
@@ -88,7 +88,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:text="@string/main_screen_items_category"
+                android:text="@string/main_screen_item_category"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#33b5e5" />
 
@@ -105,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="@string/main_screen_items_product_group"
+                    android:text="@string/main_screen_item_product_group"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <View
@@ -120,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="@string/main_screen_items_product"
+                    android:text="@string/main_screen_item_product"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <View
@@ -135,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="@string/main_screen_items_customer_group"
+                    android:text="@string/main_screen_item_customer_group"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <View
@@ -150,7 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="@string/main_screen_items_customer"
+                    android:text="@string/main_screen_item_customer"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
             </LinearLayout>
@@ -168,7 +168,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:text="@string/main_screen_items_buying"
+                android:text="@string/main_screen_item_buying"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#33b5e5" />
 
@@ -185,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="@string/main_screen_items_buying_history"
+                    android:text="@string/main_screen_item_buying_history"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
             </LinearLayout>
@@ -203,7 +203,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:text="@string/main_screen_items_lookup"
+                android:text="@string/main_screen_item_lookup"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#33b5e5" />
 
@@ -220,7 +220,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="@string/main_screen_items_QA"
+                    android:text="@string/main_screen_item_QA"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
             </LinearLayout>
@@ -238,7 +238,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:text="@string/main_screen_items_favorites"
+                android:text="@string/main_screen_item_favorite"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#33b5e5" />
 
