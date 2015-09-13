@@ -3,6 +3,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+<<<<<<< HEAD
 
     <!-- login screen -->
     <dimen name="login_text_width">288dp</dimen>
@@ -16,4 +17,7 @@
     <dimen name="btn_social_network_width">96dp</dimen>
     <dimen name="edt_login_height_hdpi">40dp</dimen>
 
+=======
+    <dimen name="fragment_title_magin_top">10dp</dimen>
+>>>>>>> master
 </resources>
