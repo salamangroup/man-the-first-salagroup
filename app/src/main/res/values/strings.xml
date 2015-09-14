@@ -41,5 +41,32 @@
     <string name="main_screen_item_favorite">Yêu thích</string>
 
     <string name="title_fragment_customer">Khách Hàng</string>
+    <string name="fragment_customer_item_address">Địa chỉ: </string>
+    <string name="fragment_customer_item_phone_number">SĐT: </string>
+    <string name="fragment_customer_item_name_example">Sala Group</string>
+    <string name="fragment_customer_item_count_example">(99)</string>
+    <string name="fragment_customer_item_phone_example">0123456789</string>
+
+    <string name="title_fragment_customer_group">Nhóm Khách Hàng</string>
+    <string name="title_fragment_add_customer_group"><u>Thêm nhóm Khách Hàng</u></string>
+    <string name="notification_add_customer_group_ok">Đã thêm nhóm thành công</string>
+    <string name="notification_add_customer_group_undo">Hoàn tác</string>
+
+    <string name="title_fragment_customer_detail">Thông tin khách hàng</string>
+    <string name="customer_detail_name">Họ Tên</string>
+    <string name="customer_detail_phone">Số điện thoại</string>
+    <string name="customer_detail_address">Thông tin địa chỉ</string>
+    <string name="customer_detail_type">Nhóm khách</string>
+    <string name="customer_detail_gender">Giới tính</string>
+    <string name="customer_detail_birthday">Sinh nhật</string>
+    <string name="customer_detail_gender_male">Nam</string>
+    <string name="customer_detail_gender_female">Nữ</string>
+    <string name="customer_detail_gender_None">Khác</string>
+
+
+
+    <string name="btn_customer_group_cancel">Hủy</string>
+    <string name="btn_customer_group_save">Lưu</string>
+    <string name="btn_customer_group_delete">Xóa</string>
 
 </resources>

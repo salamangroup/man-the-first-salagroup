@@ -5,23 +5,23 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/customerLayout"
+        android:id="@+id/customerGroupLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvTitleCustomer"
+            android:id="@+id/tvTitleCustomerGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:layout_marginTop="@dimen/fragment_title_magin_top"
-            android:text="@string/title_fragment_customer"
+            android:text="@string/title_fragment_customer_group"
             android:textColor="@color/cyan"
             android:textSize="30sp" />
 
         <ListView
-            android:id="@+id/lvAddCustomer"
+            android:id="@+id/lvAddCustomerGroup"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/fab_add_customer_margin_right"
@@ -33,7 +33,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabAddCustomer"
+        android:id="@+id/fabAddCustomerGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
