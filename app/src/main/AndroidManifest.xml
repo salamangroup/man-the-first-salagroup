@@ -28,8 +28,15 @@
         <activity android:name=".activities.CustomerGroupInfoActivity">
 
         </activity>
-        <activity android:name=".activities.CustomerDetailActivity"
+        <activity
+            android:name=".activities.CustomerDetailActivity"
             android:label="@string/app_name">
+
+        </activity>
+
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
