@@ -12,8 +12,7 @@
         android:layout_marginTop="@dimen/fragment_title_magin_top"
         android:text="@string/title_fragment_customer_detail"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#33b5e5"
-        android:id="@+id/" />
+        android:textColor="#33b5e5" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -92,9 +91,9 @@
                     android:textColor="#33b5e5" />
 
                 <DatePicker
+                    android:id="@+id/dprBirthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/dprBirthday"
                     android:calendarViewShown="false"
                     android:datePickerMode="calendar"
                     android:startYear="1990" />

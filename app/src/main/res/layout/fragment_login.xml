@@ -1,0 +1,131 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="10">
+
+    <TextView
+        android:layout_width="@dimen/login_text_width"
+        android:layout_height="@dimen/zero"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="@string/sala"
+        android:textColor="@color/primary_dark"
+        android:textSize="@dimen/sala_logo_size"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="@dimen/edt_login_width"
+        android:layout_height="@dimen/zero"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edtUsername"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edt_login_height"
+            android:layout_marginBottom="-2dp"
+            android:background="@drawable/edt_login_background"
+            android:hint="@string/username"
+            android:inputType="text|textNoSuggestions"
+            android:padding="@dimen/edt_padding"
+            android:singleLine="true"
+            android:textColor="@color/primary_text" />
+
+        <EditText
+            android:id="@+id/edtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edt_login_height"
+            android:layout_marginBottom="@dimen/edt_margin_bottom_button"
+            android:background="@drawable/edt_login_background"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="@dimen/edt_padding"
+            android:singleLine="true"
+            android:textColor="@color/primary_text" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_login_height"
+            android:background="@drawable/btn_login_background"
+            android:text="@string/login"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnForgotPassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_login_height"
+            android:background="@android:color/transparent"
+            android:text="@string/forgot_password"
+            android:textColor="@color/primary" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/login_text_width"
+        android:layout_height="@dimen/zero"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="@dimen/btn_social_network_width"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imbSignUp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_sign_up_background"
+                android:contentDescription="@string/sign_up"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample_logo" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/btn_social_network_width"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imbFacebook"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_facebook_background"
+                android:contentDescription="@string/facebook"
+                android:scaleType="centerCrop"
+                android:src="@drawable/facebook" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/btn_social_network_width"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imbGooglePlus"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_google_background"
+                android:contentDescription="@string/google_plus"
+                android:scaleType="centerCrop"
+                android:src="@drawable/google_plus" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
