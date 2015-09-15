@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginLeft="@dimen/activity_vertical_margin"
+    android:layout_marginRight="@dimen/activity_vertical_margin"
     tools:context="com.salagroup.salaman.activities.CustomerDetailActivity">
 
     <TextView
@@ -12,17 +14,12 @@
         android:layout_marginTop="@dimen/fragment_title_magin_top"
         android:text="@string/title_fragment_customer_detail"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#33b5e5"
-        android:id="@+id/" />
+        android:textColor="@color/cyan"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="433dp"
-        android:isScrollContainer="true"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:isScrollContainer="true">
 
 
         <LinearLayout
@@ -34,7 +31,8 @@
                 android:id="@+id/edtCustomerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/customer_detail_name" />
+                android:hint="@string/customer_detail_name"
+                android:focusable="true"/>
 
             <EditText
                 android:id="@+id/edtCustomerPhone"
@@ -109,8 +107,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/activity_vertical_margin"
-                    android:paddingTop="@dimen/activity_vertical_margin"
                     android:text="@string/customer_detail_gender"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#33b5e5" />
@@ -118,7 +114,9 @@
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="@dimen/tv_detail_customer_margin_left"
+                    android:layout_marginStart="@dimen/tv_detail_customer_margin_left"
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/radioButton"
@@ -128,12 +126,16 @@
 
                     <RadioButton
                         android:id="@+id/radioButton2"
+                        android:layout_marginLeft="@dimen/tv_detail_customer_margin_left"
+                        android:layout_marginStart="@dimen/tv_detail_customer_margin_left"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/customer_detail_gender_female" />
 
                     <RadioButton
                         android:id="@+id/radioButton3"
+                        android:layout_marginLeft="@dimen/tv_detail_customer_margin_left"
+                        android:layout_marginStart="@dimen/tv_detail_customer_margin_left"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/customer_detail_gender_None" />
@@ -146,13 +148,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/activity_vertical_margin"
-                    android:paddingTop="@dimen/activity_vertical_margin"
                     android:text="@string/customer_detail_type"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#33b5e5" />
