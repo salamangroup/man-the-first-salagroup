@@ -27,8 +27,7 @@ public class CustomerInfoActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_customer_list);
 
         TextView tvTitleCustomer = (TextView) findViewById(R.id.tvTitleCustomer);
-        Typeface robotoFont = Typeface.createFromAsset(this.getAssets(),"fonts/Roboto-Light.ttf");
-        tvTitleCustomer.setTypeface(robotoFont);
+        setFontforTitle(tvTitleCustomer);
 
         //TODO Adapter & ListView
         //Khai báo Adapter, kèm layout đã khai báo custom_item_fragment_customer
@@ -63,6 +62,10 @@ public class CustomerInfoActivity extends AppCompatActivity {
                 //TODO Cho phép xóa nhiều khách hàng
             }
         });
+    }
+    public void setFontforTitle(TextView tvTitleCustomer){
+        Typeface robotoFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
+        tvTitleCustomer.setTypeface(robotoFont);
     }
 
 }
