@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_marginLeft="@dimen/activity_vertical_margin"
     android:layout_marginRight="@dimen/activity_vertical_margin"
-    tools:context="com.salagroup.salaman.activities.CustomerDetailActivity">
+    tools:context="com.salagroup.salaman.activities.CustomerDetailActivity"
+    android:id="@+id/customerInfoLayout">
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,7 +15,8 @@
         android:layout_marginTop="@dimen/fragment_title_magin_top"
         android:text="@string/title_fragment_customer_detail"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/cyan"/>
+        android:textColor="@color/cyan"
+        android:id="@+id/tvTitleCustomerInfo" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -53,19 +55,19 @@
                 android:textColor="#33b5e5" />
 
             <Spinner
-                android:id="@+id/spnTinhThanh"
+                android:id="@+id/spnProvince_City"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="@dimen/activity_horizontal_margin" />
 
             <Spinner
-                android:id="@+id/spnQuanHuyen"
+                android:id="@+id/spnDistrict"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="@dimen/activity_horizontal_margin" />
 
             <EditText
-                android:id="@+id/edtAdress"
+                android:id="@+id/edtAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/store_info_item_address"
@@ -78,7 +80,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -87,15 +89,14 @@
                     android:paddingTop="@dimen/activity_vertical_margin"
                     android:text="@string/customer_detail_birthday"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#33b5e5" />
+                    android:textColor="@color/cyan" />
 
                 <DatePicker
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/dprBirthday"
                     android:calendarViewShown="false"
-                    android:datePickerMode="calendar"
-                    android:startYear="1990" />
+                    android:datePickerMode="spinner"/>
 
             </LinearLayout>
 
@@ -112,6 +113,7 @@
                     android:textColor="#33b5e5" />
 
                 <RadioGroup
+                    android:id="@+id/rdgGenderType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/tv_detail_customer_margin_left"
@@ -119,13 +121,13 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/radioButton"
+                        android:id="@+id/rdbMale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/customer_detail_gender_male" />
 
                     <RadioButton
-                        android:id="@+id/radioButton2"
+                        android:id="@+id/rdbFemale"
                         android:layout_marginLeft="@dimen/tv_detail_customer_margin_left"
                         android:layout_marginStart="@dimen/tv_detail_customer_margin_left"
                         android:layout_width="wrap_content"
@@ -133,7 +135,7 @@
                         android:text="@string/customer_detail_gender_female" />
 
                     <RadioButton
-                        android:id="@+id/radioButton3"
+                        android:id="@+id/rdbOther"
                         android:layout_marginLeft="@dimen/tv_detail_customer_margin_left"
                         android:layout_marginStart="@dimen/tv_detail_customer_margin_left"
                         android:layout_width="wrap_content"
@@ -176,21 +178,21 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnCusDetailCancel"
             style="?android:buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_customer_group_cancel" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnCusDetailDelete"
             style="?android:buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_customer_group_delete" />
 
         <Button
-            android:id="@+id/btnUpdate"
+            android:id="@+id/btnCusDetailUpdate"
             style="?android:buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
