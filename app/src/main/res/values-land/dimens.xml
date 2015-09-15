@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- register screen -->
-    <dimen name="edt_width">220dp</dimen>
-    <dimen name="reg_margin_bottom">8dp</dimen>
-    <dimen name="reg_edittext_padding">8dp</dimen>
-    <dimen name="reg_edittext_textsize">16sp</dimen>
-    <dimen name="reg_margin_bottom_large">32dp</dimen>
-</resources>

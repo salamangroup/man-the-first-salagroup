@@ -33,8 +33,7 @@ public class CustomerGroupInfoActivity extends AppCompatActivity implements View
         setContentView(R.layout.fragment_customer_group_list);
 
         TextView tvTitleCustomer = (TextView) findViewById(R.id.tvTitleCustomerGroup);
-        Typeface robotoFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
-        tvTitleCustomer.setTypeface(robotoFont);
+        setFontforTitle(tvTitleCustomer);
 
         //TODO Adapter & ListView
         //Khai báo Adapter, kèm layout đã khai báo custom_item_fragment_customer_group
@@ -60,7 +59,8 @@ public class CustomerGroupInfoActivity extends AppCompatActivity implements View
             case R.id.fabAddCustomerGroup:
 
                 LayoutInflater inflater = LayoutInflater.from(CustomerGroupInfoActivity.this);
-                View mDialog = inflater.inflate(R.layout.dialog_add_group_customer, (ViewGroup) findViewById(R.id.dialog_add_customer_group));
+                View mDialog = inflater.inflate(R.layout.dialog_add_group_customer,
+                        (ViewGroup) findViewById(R.id.dialog_add_customer_group));
 
                 edtCustomerGroup = (EditText) mDialog.findViewById(R.id.edtCustomerGroup);
                 //TODO xử lý tên nhóm nhập vào
@@ -77,18 +77,18 @@ public class CustomerGroupInfoActivity extends AppCompatActivity implements View
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //TODO Lưu tên nhóm mà shop nhập
-                                Snackbar.make(customerGroupLayout, getString(R.string.notification_add_customer_group_ok), Snackbar.LENGTH_LONG)
-                                        .setAction(getString(R.string.notification_add_customer_group_undo), new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                //TODO Hoàn tác nhóm vừa thêm.
-                                            }
-                                        }).show();
+                                Snackbar.make(customerGroupLayout, getString(R.string.notification_add_customer_group_ok),
+                                        Snackbar.LENGTH_LONG).show();
                             }
                         }).show();
             case R.id.fabAddCustomer:
                 break;
         }
+    }
+
+    public void setFontforTitle(TextView tvTitleCustomer){
+        Typeface robotoFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
+        tvTitleCustomer.setTypeface(robotoFont);
     }
 }
 
