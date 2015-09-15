@@ -64,9 +64,28 @@
     <string name="customer_detail_gender_None">Khác</string>
 
 
-
     <string name="btn_customer_group_cancel">Hủy</string>
     <string name="btn_customer_group_save">Lưu</string>
     <string name="btn_customer_group_delete">Xóa</string>
 
+    <!-- login screen -->
+    <string name="sala">SALA</string>
+    <string name="username">Tên đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="login">ĐĂNG NHẬP</string>
+    <string name="forgot_password">QUÊN MẬT KHẨU ?</string>
+    <string name="sign_up">Đăng kí</string>
+    <string name="facebook">Facebook</string>
+    <string name="google_plus">Google+</string>
+
+    <!-- register screen -->
+    <string name="re_password">Nhập lại mật khẩu</string>
+    <string name="display_name">Tên hiển thị</string>
+    <string name="Male">Nam</string>
+    <string name="Female">Nữ</string>
+    <string name="gender_other">Khác</string>
+    <string name="address">Địa chỉ</string>
+    <string name="birth_day">Ngày sinh</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Số điện thoại</string>
 </resources>
