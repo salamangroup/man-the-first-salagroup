@@ -20,10 +20,12 @@
         </activity>
         <activity
             android:name=".activities.StoreInfoActivity"
+            android:theme="@style/LightBlueTealTheme"
             android:label="@string/title_activity_store_info" >
         </activity>
         <activity
             android:name=".activities.MainScreenActivity"
+            android:theme="@style/LightBlueTealTheme"
             android:label="@string/title_activity_main_screen" >
         </activity>
     </application>

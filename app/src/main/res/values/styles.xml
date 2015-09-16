@@ -5,6 +5,12 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="LightBlueTealTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimaryDark">#0288D1</item>
+        <item name="colorPrimary">#03A9F4</item>
+        <item name="colorAccent">#009688</item>
+    </style>
+
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
