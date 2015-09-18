@@ -92,29 +92,32 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <FrameLayout
+            android:id="@+id/FrameLayout1"
             android:layout_width="@dimen/btn_social_network_width"
             android:layout_height="match_parent">
 
-            <ImageButton
-                android:id="@+id/imbFacebook"
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/btnLoginFacebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:visibility="gone"/>
+
+            <Button
+
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/btn_facebook_background"
-                android:contentDescription="@string/facebook"
-                android:scaleType="centerCrop"
-                android:src="@drawable/facebook" />
-
-        </RelativeLayout>
+                android:layout_gravity="bottom|center"
+                android:background="@drawable/facebook"/>
+        </FrameLayout>
 
         <RelativeLayout
             android:layout_width="@dimen/btn_social_network_width"
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/imbGooglePlus"
+                android:id="@+id/imbLoginGooglePlus"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_alignParentBottom="true"

@@ -79,4 +79,5 @@ public class CustomerDetailActivity extends AppCompatActivity implements View.On
         Typeface robotoFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
         tvTitleCustomer.setTypeface(robotoFont);
     }
+
 }
