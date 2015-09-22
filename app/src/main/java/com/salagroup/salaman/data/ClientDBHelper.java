@@ -12,13 +12,23 @@ import java.io.InputStream;
 
 public class ClientDBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "saladb_2015_09_17";
+    public static final String TEST = "test";
+
+    private static final String DATABASE_NAME = "saladb_2015_09_18";
     private static final int DATABASE_VERSION = 1;
 
     private String databasePath;
     private Context context;
 
-    public ClientDBHelper(Context context) {
+    private static ClientDBHelper instance;
+
+    public static ClientDBHelper newInstance(Context context) {
+        if (instance == null)
+            instance = new ClientDBHelper(context.getApplicationContext());
+        return instance;
+    }
+
+    private ClientDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
         databasePath = context.getFilesDir().getParent() + "/databases/" + DATABASE_NAME;
@@ -50,7 +60,7 @@ public class ClientDBHelper extends SQLiteOpenHelper {
             InputStream is = assetManager.open("database/" + DATABASE_NAME);
             FileOutputStream fos = new FileOutputStream(databasePath);
             byte[] buffer = new byte[1024];
-            int len = 0;
+            int len;
             while ((len = is.read(buffer)) != -1) {
                 fos.write(buffer, 0, len);
             }
@@ -73,6 +83,6 @@ public class ClientDBHelper extends SQLiteOpenHelper {
         if (checkDb != null) {
             checkDb.close();
         }
-        return checkDb == null ? false : true;
+        return checkDb != null;
     }
 }

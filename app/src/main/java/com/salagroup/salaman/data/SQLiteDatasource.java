@@ -9,7 +9,7 @@ public class SQLiteDatasource {
     private SQLiteDatabase sqLiteDatabase;
 
     public SQLiteDatasource(Context context) {
-        clientDBHelper = new ClientDBHelper(context);
+        clientDBHelper = ClientDBHelper.newInstance(context);
         clientDBHelper.createDatabase();
         sqLiteDatabase = clientDBHelper.openDatabase();
     }

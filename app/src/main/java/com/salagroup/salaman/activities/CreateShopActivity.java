@@ -1,8 +1,8 @@
 package com.salagroup.salaman.activities;
 
 import android.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +16,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.salagroup.salaman.R;
+import com.salagroup.salaman.pojo.Shop;
 
 
-public class StoreInfoActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateShopActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText edtTenCuaHang, edtSoDTGiaoDich, edtDiaChi;
     private Spinner spnTinhThanh;
@@ -61,8 +62,8 @@ public class StoreInfoActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
-                LayoutInflater inflater = LayoutInflater.from(StoreInfoActivity.this);
-                View mDialog = inflater.inflate(R.layout.activity_store_info_dialog_other_types, (ViewGroup)findViewById(R.id.dialog_other_types_root_layout));
+                LayoutInflater inflater = LayoutInflater.from(CreateShopActivity.this);
+                View mDialog = inflater.inflate(R.layout.activity_store_info_dialog_other_types, (ViewGroup) findViewById(R.id.dialog_other_types_root_layout));
 
                 ckbGiaDung = (CheckBox) mDialog.findViewById(R.id.chkGiaDung);
                 ckbGiaDung.setChecked(chkGiaDung);
@@ -97,7 +98,7 @@ public class StoreInfoActivity extends AppCompatActivity implements View.OnClick
                     }
                 });
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(StoreInfoActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(CreateShopActivity.this);
                 builder.setView(mDialog)
                         .setTitle(R.string.store_info_item_other_types)
                         .setPositiveButton("Ok", null)
@@ -109,18 +110,15 @@ public class StoreInfoActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initTinhThanh() {
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(StoreInfoActivity.this, android.R.layout.simple_spinner_dropdown_item) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateShopActivity.this, android.R.layout.simple_spinner_dropdown_item) {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-
                 View v = super.getView(position, convertView, parent);
                 if (position == getCount()) {
                     ((TextView) v.findViewById(android.R.id.text1)).setText("");
                     ((TextView) v.findViewById(android.R.id.text1)).setHint(getItem(getCount()));
                 }
-
                 return v;
             }
 
@@ -128,7 +126,6 @@ public class StoreInfoActivity extends AppCompatActivity implements View.OnClick
             public int getCount() {
                 return super.getCount() - 1; // you dont display last item. It is used as hint.
             }
-
         };
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -142,7 +139,7 @@ public class StoreInfoActivity extends AppCompatActivity implements View.OnClick
 
     private void initQuanHuyen(long tinhthanhID) {
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(StoreInfoActivity.this, android.R.layout.simple_spinner_dropdown_item) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateShopActivity.this, android.R.layout.simple_spinner_dropdown_item) {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -179,30 +176,24 @@ public class StoreInfoActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-
-        //TODO lưu dữ liệu lên server rồi thông báo thành công hoặc thất bại
     }
 
+    private Shop checkInput() {
+        String shopName = edtTenCuaHang.getText().toString();
+        String contactPhone = edtSoDTGiaoDich.getText().toString();
+        String address = edtDiaChi.getText().toString();
+        if (shopName.trim().isEmpty()) {
+            edtTenCuaHang.setError("Vui lòng nhập tên của hàng.");
+            edtTenCuaHang.requestFocus();
+        } else if (contactPhone.trim().isEmpty()) {
+            edtSoDTGiaoDich.setError("Vui lòng nhập tên số điện thoại giao dịch.");
+            edtSoDTGiaoDich.requestFocus();
+        } else if (address.trim().isEmpty()) {
+            edtDiaChi.setError("Vui lòng nhập địa chỉ của cửa hàng!");
+            edtDiaChi.requestFocus();
+        }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_store_info, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+
+        return null;
+    }
 }
