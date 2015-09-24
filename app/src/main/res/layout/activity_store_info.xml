@@ -9,10 +9,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.salagroup.salaman.activities.CreateShopActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
 
         <TextView
@@ -27,13 +28,17 @@
             android:id="@+id/edtTenCuaHang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/store_info_item_shop_name" />
+            android:hint="@string/store_info_item_shop_name"
+            android:inputType="textNoSuggestions"
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/edtSoDTGiaoDich"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/store_info_item_contact_number" />
+            android:hint="@string/store_info_item_contact_number"
+            android:inputType="phone"
+            android:singleLine="true" />
 
         <View style="@style/Divider" />
 
@@ -51,12 +56,14 @@
             android:id="@+id/spnTinhThanh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin" />
 
         <Spinner
             android:id="@+id/spnQuanHuyen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin" />
 
         <EditText
@@ -64,9 +71,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/store_info_item_address"
-            android:inputType="textMultiLine"
+            android:inputType="textNoSuggestions"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin" />
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:singleLine="true" />
 
         <View style="@style/Divider" />
 
@@ -80,10 +88,11 @@
             android:textColor="#03A9F4" />
 
         <EditText
+            android:id="@+id/edtWorkingPeriod"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/store_info_item_working_hours_example"
-            android:inputType="textMultiLine"
+            android:inputType="textMultiLine|textNoSuggestions"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin" />
 
@@ -126,17 +135,14 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <Button
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:id="@+id/btnUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@drawable/lightblue_button_background"
-            android:textSize="20sp"
+            android:text="@string/store_info_item_update"
             android:textColor="#FFFFFF"
-            android:text="@string/store_info_item_update" />
-
-
+            android:textSize="20sp" />
     </LinearLayout>
-
 </ScrollView>

@@ -2,27 +2,22 @@ package com.salagroup.salaman.pojo;
 
 import java.io.Serializable;
 
-public class ShopWorkingPeriod implements Serializable {
+public class Industry implements Serializable {
     private long _id;
-    private long shopID;
-    private String date;
-    private String time;
+    private String code;
+    private String industryName;
+    private String industryNameE;
+    private int industryLevel;
+    private int parentID;
     private String note;
     private boolean status;
     private long createdBy;
     private String createdDateTime;
     private long lastUpdatedBy;
     private String lastUpdatedDateTime;
+    private boolean isChecked;
 
-    public ShopWorkingPeriod() {
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public Industry() {
     }
 
     public long get_id() {
@@ -33,20 +28,44 @@ public class ShopWorkingPeriod implements Serializable {
         this._id = _id;
     }
 
-    public long getShopID() {
-        return shopID;
+    public String getCode() {
+        return code;
     }
 
-    public void setShopID(long shopID) {
-        this.shopID = shopID;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getTime() {
-        return time;
+    public String getIndustryName() {
+        return industryName;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setIndustryName(String industryName) {
+        this.industryName = industryName;
+    }
+
+    public String getIndustryNameE() {
+        return industryNameE;
+    }
+
+    public void setIndustryNameE(String industryNameE) {
+        this.industryNameE = industryNameE;
+    }
+
+    public int getIndustryLevel() {
+        return industryLevel;
+    }
+
+    public void setIndustryLevel(int industryLevel) {
+        this.industryLevel = industryLevel;
+    }
+
+    public int getParentID() {
+        return parentID;
+    }
+
+    public void setParentID(int parentID) {
+        this.parentID = parentID;
     }
 
     public String getNote() {
@@ -95,5 +114,13 @@ public class ShopWorkingPeriod implements Serializable {
 
     public void setLastUpdatedDateTime(String lastUpdatedDateTime) {
         this.lastUpdatedDateTime = lastUpdatedDateTime;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
     }
 }

@@ -2,11 +2,15 @@ package com.salagroup.salaman.pojo;
 
 import java.io.Serializable;
 
-public class ShopWorkingPeriod implements Serializable {
+public class Region implements Serializable {
     private long _id;
-    private long shopID;
-    private String date;
-    private String time;
+    private String regionCode;
+    private int regionLevel;
+    private String regionName;
+    private String description;
+    private int ordinal;
+    private long parentID;
+    private String parentCode;
     private String note;
     private boolean status;
     private long createdBy;
@@ -14,15 +18,7 @@ public class ShopWorkingPeriod implements Serializable {
     private long lastUpdatedBy;
     private String lastUpdatedDateTime;
 
-    public ShopWorkingPeriod() {
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public Region() {
     }
 
     public long get_id() {
@@ -33,20 +29,60 @@ public class ShopWorkingPeriod implements Serializable {
         this._id = _id;
     }
 
-    public long getShopID() {
-        return shopID;
+    public String getRegionCode() {
+        return regionCode;
     }
 
-    public void setShopID(long shopID) {
-        this.shopID = shopID;
+    public void setRegionCode(String regionCode) {
+        this.regionCode = regionCode;
     }
 
-    public String getTime() {
-        return time;
+    public int getRegionLevel() {
+        return regionLevel;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setRegionLevel(int regionLevel) {
+        this.regionLevel = regionLevel;
+    }
+
+    public String getRegionName() {
+        return regionName;
+    }
+
+    public void setRegionName(String regionName) {
+        this.regionName = regionName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getOrdinal() {
+        return ordinal;
+    }
+
+    public void setOrdinal(int ordinal) {
+        this.ordinal = ordinal;
+    }
+
+    public long getParentID() {
+        return parentID;
+    }
+
+    public void setParentID(long parentID) {
+        this.parentID = parentID;
+    }
+
+    public String getParentCode() {
+        return parentCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
     }
 
     public String getNote() {
