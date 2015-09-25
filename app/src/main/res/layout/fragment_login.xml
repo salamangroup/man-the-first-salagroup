@@ -92,12 +92,13 @@
 
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="@dimen/btn_social_network_width"
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/imbFacebook"
+                android:id="@+id/btnLoginWithFacebook"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_alignParentBottom="true"
@@ -114,7 +115,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/imbGooglePlus"
+                android:id="@+id/imbLoginGooglePlus"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_alignParentBottom="true"

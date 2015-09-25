@@ -88,4 +88,6 @@
     <string name="birth_day">Ngày sinh</string>
     <string name="email">Email</string>
     <string name="phone_number">Số điện thoại</string>
+
+    <string name="facebook_app_id">886098914772907</string>
 </resources>
