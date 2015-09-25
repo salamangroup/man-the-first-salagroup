@@ -16,9 +16,21 @@
             android:name=".activities.MainActivity"
             android:label="@string/app_name" />
         <activity
+<<<<<<< HEAD
             android:name=".activities.StoreInfoActivity"
             android:label="@string/title_activity_store_info"/>
 
+=======
+            android:name=".activities.CreateShopActivity"
+            android:label="@string/title_activity_store_info"
+            android:theme="@style/LightBlueTealTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+>>>>>>> dev_finish_branch
         <activity
             android:name=".activities.MainScreenActivity"
             android:label="@string/title_activity_main_screen"/>
@@ -33,6 +45,7 @@
 
         <activity
             android:name=".activities.LoginActivity"
+<<<<<<< HEAD
             android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,6 +59,9 @@
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name" />
+=======
+            android:theme="@style/LoginTheme"></activity>
+>>>>>>> dev_finish_branch
     </application>
 
 </manifest>
