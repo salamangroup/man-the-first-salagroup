@@ -1,36 +1,32 @@
 package com.salagroup.salaman.pojo;
 
-import java.io.Serializable;
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
-public class ShopWorkingPeriod implements Serializable {
-    private long _id;
+@Table(name = "T01_Shop_WorkingPeriod", id = "_id")
+public class ShopWorkingPeriod extends Model {
+    @Column(name = "ShopID")
     private long shopID;
-    private String date;
+    @Column(name = "Day")
+    private String day;
+    @Column(name = "Time")
     private String time;
+    @Column(name = "Note")
     private String note;
+    @Column(name = "Status")
     private boolean status;
+    @Column(name = "CreatedBy")
     private long createdBy;
+    @Column(name = "CreatedDateTime")
     private String createdDateTime;
+    @Column(name = "LastUpdatedBy")
     private long lastUpdatedBy;
+    @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
     public ShopWorkingPeriod() {
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public long get_id() {
-        return _id;
-    }
-
-    public void set_id(long _id) {
-        this._id = _id;
+        super();
     }
 
     public long getShopID() {
@@ -39,6 +35,14 @@ public class ShopWorkingPeriod implements Serializable {
 
     public void setShopID(long shopID) {
         this.shopID = shopID;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public String getTime() {

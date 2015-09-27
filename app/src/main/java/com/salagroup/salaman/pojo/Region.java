@@ -1,32 +1,44 @@
 package com.salagroup.salaman.pojo;
 
-import java.io.Serializable;
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
-public class Region implements Serializable {
-    private long _id;
+import java.io.Serializable;
+import java.util.List;
+
+@Table(name = "T00_Region", id = "_id")
+public class Region extends Model implements Serializable {
+    @Column(name = "RegionCode")
     private String regionCode;
+    @Column(name = "RegionLevel")
     private int regionLevel;
+    @Column(name = "RegionName")
     private String regionName;
+    @Column(name = "Description")
     private String description;
+    @Column(name = "Ordinal")
     private int ordinal;
+    @Column(name = "ParentID")
     private long parentID;
+    @Column(name = "ParentCode")
     private String parentCode;
+    @Column(name = "Note")
     private String note;
+    @Column(name = "Status")
     private boolean status;
+    @Column(name = "CreatedBy")
     private long createdBy;
+    @Column(name = "CreatedDateTime")
     private String createdDateTime;
+    @Column(name = "LastUpdatedBy")
     private long lastUpdatedBy;
+    @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
     public Region() {
-    }
-
-    public long get_id() {
-        return _id;
-    }
-
-    public void set_id(long _id) {
-        this._id = _id;
+        super();
     }
 
     public String getRegionCode() {
@@ -131,5 +143,13 @@ public class Region implements Serializable {
 
     public void setLastUpdatedDateTime(String lastUpdatedDateTime) {
         this.lastUpdatedDateTime = lastUpdatedDateTime;
+    }
+
+    public static Region getFirstRegion() {
+        return new Select().from(Region.class).executeSingle();
+    }
+
+    public static List<Region> getRegionByLevel(int regionLevel) {
+        return new Select().from(Region.class).where("RegionLevel = ?", regionLevel).execute();
     }
 }

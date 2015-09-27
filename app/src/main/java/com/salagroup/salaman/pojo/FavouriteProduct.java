@@ -4,14 +4,12 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T01_Shop_Industry", id = "_id")
-public class ShopIndustry extends Model {
-    @Column(name = "Code")
-    private String code;
-    @Column(name = "ShopID")
-    private long shopID;
-    @Column(name = "IndustryID")
-    private long industryID;
+@Table(name = "T04_FavouriteProduct", id = "_id")
+public class FavouriteProduct extends Model {
+    @Column(name = "UserID")
+    private long userID;
+    @Column(name = "ProductID")
+    private long productID;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -25,32 +23,24 @@ public class ShopIndustry extends Model {
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
-    public ShopIndustry() {
+    public FavouriteProduct() {
         super();
     }
 
-    public String getCode() {
-        return code;
+    public long getUserID() {
+        return userID;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setUserID(long userID) {
+        this.userID = userID;
     }
 
-    public long getShopID() {
-        return shopID;
+    public long getProductID() {
+        return productID;
     }
 
-    public void setShopID(long shopID) {
-        this.shopID = shopID;
-    }
-
-    public long getIndustryID() {
-        return industryID;
-    }
-
-    public void setIndustryID(long industryID) {
-        this.industryID = industryID;
+    public void setProductID(long productID) {
+        this.productID = productID;
     }
 
     public String getNote() {
