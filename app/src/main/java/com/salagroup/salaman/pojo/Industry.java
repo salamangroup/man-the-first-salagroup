@@ -4,27 +4,20 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T02_Product", id = "_id")
-public class Product extends Model {
-
+@Table(name = "T02_Industry", id = "_id")
+public class Industry extends Model {
     @Column(name = "Code")
     private String code;
-    @Column(name = "ShopID")
-    private long shopID;
-    @Column(name = "ProductName")
-    private String productName;
-    @Column(name = "ProductNameE")
-    private String productNameE;
-    @Column(name = "ProductGroupID")
-    private long productGroupID;
-    @Column(name = "Unit")
-    private String unit;
-    @Column(name = "Description")
-    private String Description;
-    @Column(name = "LikeCount")
-    private String likeCount;
-    @Column(name = "CommentCount")
-    private String commentCount;
+    @Column(name = "IndustryName")
+    private String industryName;
+    @Column(name = "IndustryNameE")
+    private String industryNameE;
+    @Column(name = "IndustryLevel")
+    private int industryLevel;
+    @Column(name = "Ordinal")
+    private int ordinal;
+    @Column(name = "ParentID")
+    private int parentID;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -37,8 +30,9 @@ public class Product extends Model {
     private long lastUpdatedBy;
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
+    private boolean isChecked;
 
-    public Product() {
+    public Industry() {
         super();
     }
 
@@ -50,68 +44,44 @@ public class Product extends Model {
         this.code = code;
     }
 
-    public long getShopID() {
-        return shopID;
+    public String getIndustryName() {
+        return industryName;
     }
 
-    public void setShopID(long shopID) {
-        this.shopID = shopID;
+    public void setIndustryName(String industryName) {
+        this.industryName = industryName;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getIndustryNameE() {
+        return industryNameE;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setIndustryNameE(String industryNameE) {
+        this.industryNameE = industryNameE;
     }
 
-    public String getProductNameE() {
-        return productNameE;
+    public int getIndustryLevel() {
+        return industryLevel;
     }
 
-    public void setProductNameE(String productNameE) {
-        this.productNameE = productNameE;
+    public void setIndustryLevel(int industryLevel) {
+        this.industryLevel = industryLevel;
     }
 
-    public long getProductGroupID() {
-        return productGroupID;
+    public int getOrdinal() {
+        return ordinal;
     }
 
-    public void setProductGroupID(long productGroupID) {
-        this.productGroupID = productGroupID;
+    public void setOrdinal(int ordinal) {
+        this.ordinal = ordinal;
     }
 
-    public String getUnit() {
-        return unit;
+    public int getParentID() {
+        return parentID;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public String getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(String likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
+    public void setParentID(int parentID) {
+        this.parentID = parentID;
     }
 
     public String getNote() {
@@ -160,5 +130,13 @@ public class Product extends Model {
 
     public void setLastUpdatedDateTime(String lastUpdatedDateTime) {
         this.lastUpdatedDateTime = lastUpdatedDateTime;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
     }
 }

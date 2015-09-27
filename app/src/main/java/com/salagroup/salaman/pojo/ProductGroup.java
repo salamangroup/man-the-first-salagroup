@@ -4,9 +4,8 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T02_Product", id = "_id")
-public class Product extends Model {
-
+@Table(name = "T02_ProductGroup", id = "_id")
+public class ProductGroup extends Model {
     @Column(name = "Code")
     private String code;
     @Column(name = "ShopID")
@@ -15,16 +14,8 @@ public class Product extends Model {
     private String productName;
     @Column(name = "ProductNameE")
     private String productNameE;
-    @Column(name = "ProductGroupID")
-    private long productGroupID;
-    @Column(name = "Unit")
-    private String unit;
-    @Column(name = "Description")
-    private String Description;
-    @Column(name = "LikeCount")
-    private String likeCount;
-    @Column(name = "CommentCount")
-    private String commentCount;
+    @Column(name = "SettingID")
+    private long settingID;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -38,7 +29,7 @@ public class Product extends Model {
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
-    public Product() {
+    public ProductGroup() {
         super();
     }
 
@@ -74,44 +65,12 @@ public class Product extends Model {
         this.productNameE = productNameE;
     }
 
-    public long getProductGroupID() {
-        return productGroupID;
+    public long getSettingID() {
+        return settingID;
     }
 
-    public void setProductGroupID(long productGroupID) {
-        this.productGroupID = productGroupID;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public String getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(String likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
+    public void setSettingID(long settingID) {
+        this.settingID = settingID;
     }
 
     public String getNote() {

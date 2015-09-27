@@ -11,7 +11,7 @@ import android.widget.GridView;
 import com.google.gson.Gson;
 import com.salagroup.salaman.R;
 import com.salagroup.salaman.adapter.LoadImageAdapter;
-import com.salagroup.salaman.pojo.Product;
+import com.salagroup.salaman.pojo.ProductDemo;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String json) {
             super.onPostExecute(json);
             Gson gson = new Gson();
-            Product product = gson.fromJson(json,Product.class);
-            strImageLists.addAll(product.getImages());
+            ProductDemo productDemo = gson.fromJson(json,ProductDemo.class);
+            strImageLists.addAll(productDemo.getImages());
             adapter.notifyDataSetChanged();
         }
     }

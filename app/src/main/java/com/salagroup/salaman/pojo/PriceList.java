@@ -4,27 +4,24 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T02_Product", id = "_id")
-public class Product extends Model {
-
+@Table(name = "T02_PriceList", id = "_id")
+public class PriceList extends Model {
     @Column(name = "Code")
     private String code;
     @Column(name = "ShopID")
     private long shopID;
-    @Column(name = "ProductName")
-    private String productName;
-    @Column(name = "ProductNameE")
-    private String productNameE;
-    @Column(name = "ProductGroupID")
-    private long productGroupID;
-    @Column(name = "Unit")
-    private String unit;
-    @Column(name = "Description")
-    private String Description;
-    @Column(name = "LikeCount")
-    private String likeCount;
-    @Column(name = "CommentCount")
-    private String commentCount;
+    @Column(name = "ProductID")
+    private long productID;
+    @Column(name = "CostPrice")
+    private double costPrice;
+    @Column(name = "RetailPrice")
+    private double retailPrice;
+    @Column(name = "WholeSalePrice")
+    private double wholeSalePrice;
+    @Column(name = "MinQty")
+    private int minQty;
+    @Column(name = "FromDate")
+    private String fromDate;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -38,7 +35,7 @@ public class Product extends Model {
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
-    public Product() {
+    public PriceList() {
         super();
     }
 
@@ -58,60 +55,52 @@ public class Product extends Model {
         this.shopID = shopID;
     }
 
-    public String getProductName() {
-        return productName;
+    public long getProductID() {
+        return productID;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setProductID(long productID) {
+        this.productID = productID;
     }
 
-    public String getProductNameE() {
-        return productNameE;
+    public double getCostPrice() {
+        return costPrice;
     }
 
-    public void setProductNameE(String productNameE) {
-        this.productNameE = productNameE;
+    public void setCostPrice(double costPrice) {
+        this.costPrice = costPrice;
     }
 
-    public long getProductGroupID() {
-        return productGroupID;
+    public double getRetailPrice() {
+        return retailPrice;
     }
 
-    public void setProductGroupID(long productGroupID) {
-        this.productGroupID = productGroupID;
+    public void setRetailPrice(double retailPrice) {
+        this.retailPrice = retailPrice;
     }
 
-    public String getUnit() {
-        return unit;
+    public double getWholeSalePrice() {
+        return wholeSalePrice;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setWholeSalePrice(double wholeSalePrice) {
+        this.wholeSalePrice = wholeSalePrice;
     }
 
-    public String getDescription() {
-        return Description;
+    public int getMinQty() {
+        return minQty;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setMinQty(int minQty) {
+        this.minQty = minQty;
     }
 
-    public String getLikeCount() {
-        return likeCount;
+    public String getFromDate() {
+        return fromDate;
     }
 
-    public void setLikeCount(String likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
     }
 
     public String getNote() {

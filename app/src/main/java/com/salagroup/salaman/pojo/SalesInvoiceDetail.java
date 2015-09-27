@@ -4,27 +4,28 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T02_Product", id = "_id")
-public class Product extends Model {
-
-    @Column(name = "Code")
-    private String code;
+@Table(name = "T02_SalesInvoiceDetail", id = "_id")
+public class SalesInvoiceDetail extends Model {
+    @Column(name = "ID")
+    private long ID;
+    @Column(name = "UserID")
+    private long userID;
     @Column(name = "ShopID")
     private long shopID;
-    @Column(name = "ProductName")
-    private String productName;
-    @Column(name = "ProductNameE")
-    private String productNameE;
-    @Column(name = "ProductGroupID")
-    private long productGroupID;
-    @Column(name = "Unit")
-    private String unit;
-    @Column(name = "Description")
-    private String Description;
-    @Column(name = "LikeCount")
-    private String likeCount;
-    @Column(name = "CommentCount")
-    private String commentCount;
+    @Column(name = "ProductID")
+    private long productID;
+    @Column(name = "Price")
+    private double price;
+    @Column(name = "Qty")
+    private int qty;
+    @Column(name = "Amount")
+    private double amount;
+    @Column(name = "Discount")
+    private double discount;
+    @Column(name = "DiscountAmt")
+    private double discountAmt;
+    @Column(name = "TotalAmt")
+    private double totalAmt;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -38,16 +39,24 @@ public class Product extends Model {
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
-    public Product() {
+    public SalesInvoiceDetail() {
         super();
     }
 
-    public String getCode() {
-        return code;
+    public long getID() {
+        return ID;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setID(long ID) {
+        this.ID = ID;
+    }
+
+    public long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(long userID) {
+        this.userID = userID;
     }
 
     public long getShopID() {
@@ -58,60 +67,60 @@ public class Product extends Model {
         this.shopID = shopID;
     }
 
-    public String getProductName() {
-        return productName;
+    public long getProductID() {
+        return productID;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setProductID(long productID) {
+        this.productID = productID;
     }
 
-    public String getProductNameE() {
-        return productNameE;
+    public double getPrice() {
+        return price;
     }
 
-    public void setProductNameE(String productNameE) {
-        this.productNameE = productNameE;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public long getProductGroupID() {
-        return productGroupID;
+    public int getQty() {
+        return qty;
     }
 
-    public void setProductGroupID(long productGroupID) {
-        this.productGroupID = productGroupID;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
-    public String getUnit() {
-        return unit;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public String getDescription() {
-        return Description;
+    public double getDiscount() {
+        return discount;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
-    public String getLikeCount() {
-        return likeCount;
+    public double getDiscountAmt() {
+        return discountAmt;
     }
 
-    public void setLikeCount(String likeCount) {
-        this.likeCount = likeCount;
+    public void setDiscountAmt(double discountAmt) {
+        this.discountAmt = discountAmt;
     }
 
-    public String getCommentCount() {
-        return commentCount;
+    public double getTotalAmt() {
+        return totalAmt;
     }
 
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
+    public void setTotalAmt(double totalAmt) {
+        this.totalAmt = totalAmt;
     }
 
     public String getNote() {

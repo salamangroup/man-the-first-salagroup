@@ -16,4 +16,7 @@
     <color name="button_sign_up_pressed">#D6A8DE</color>
     <color name="button_facebook_pressed">#6C84B4</color>
     <color name="button_google_pressed">#F86D5C</color>
+
+    <color name="light_blue">#03A9F4</color>
+
 </resources>

@@ -4,27 +4,20 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T02_Product", id = "_id")
-public class Product extends Model {
-
+@Table(name = "T03_Topic_QA", id = "_id")
+public class TopicQA extends Model {
     @Column(name = "Code")
     private String code;
     @Column(name = "ShopID")
     private long shopID;
-    @Column(name = "ProductName")
-    private String productName;
-    @Column(name = "ProductNameE")
-    private String productNameE;
-    @Column(name = "ProductGroupID")
-    private long productGroupID;
-    @Column(name = "Unit")
-    private String unit;
-    @Column(name = "Description")
-    private String Description;
-    @Column(name = "LikeCount")
-    private String likeCount;
-    @Column(name = "CommentCount")
-    private String commentCount;
+    @Column(name = "UserID")
+    private long userID;
+    @Column(name = "TopicID")
+    private long topicID;
+    @Column(name = "Question")
+    private String question;
+    @Column(name = "Answer")
+    private String answer;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -38,7 +31,7 @@ public class Product extends Model {
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
-    public Product() {
+    public TopicQA() {
         super();
     }
 
@@ -58,60 +51,36 @@ public class Product extends Model {
         this.shopID = shopID;
     }
 
-    public String getProductName() {
-        return productName;
+    public long getUserID() {
+        return userID;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setUserID(long userID) {
+        this.userID = userID;
     }
 
-    public String getProductNameE() {
-        return productNameE;
+    public long getTopicID() {
+        return topicID;
     }
 
-    public void setProductNameE(String productNameE) {
-        this.productNameE = productNameE;
+    public void setTopicID(long topicID) {
+        this.topicID = topicID;
     }
 
-    public long getProductGroupID() {
-        return productGroupID;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setProductGroupID(long productGroupID) {
-        this.productGroupID = productGroupID;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getUnit() {
-        return unit;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public String getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(String likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public String getNote() {

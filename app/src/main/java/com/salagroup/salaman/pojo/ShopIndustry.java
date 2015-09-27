@@ -4,27 +4,14 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T02_Product", id = "_id")
-public class Product extends Model {
-
+@Table(name = "T01_Shop_Industry", id = "_id")
+public class ShopIndustry extends Model {
     @Column(name = "Code")
     private String code;
     @Column(name = "ShopID")
     private long shopID;
-    @Column(name = "ProductName")
-    private String productName;
-    @Column(name = "ProductNameE")
-    private String productNameE;
-    @Column(name = "ProductGroupID")
-    private long productGroupID;
-    @Column(name = "Unit")
-    private String unit;
-    @Column(name = "Description")
-    private String Description;
-    @Column(name = "LikeCount")
-    private String likeCount;
-    @Column(name = "CommentCount")
-    private String commentCount;
+    @Column(name = "IndustryID")
+    private long industryID;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -38,7 +25,7 @@ public class Product extends Model {
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
-    public Product() {
+    public ShopIndustry() {
         super();
     }
 
@@ -58,60 +45,12 @@ public class Product extends Model {
         this.shopID = shopID;
     }
 
-    public String getProductName() {
-        return productName;
+    public long getIndustryID() {
+        return industryID;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductNameE() {
-        return productNameE;
-    }
-
-    public void setProductNameE(String productNameE) {
-        this.productNameE = productNameE;
-    }
-
-    public long getProductGroupID() {
-        return productGroupID;
-    }
-
-    public void setProductGroupID(long productGroupID) {
-        this.productGroupID = productGroupID;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public String getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(String likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
+    public void setIndustryID(long industryID) {
+        this.industryID = industryID;
     }
 
     public String getNote() {

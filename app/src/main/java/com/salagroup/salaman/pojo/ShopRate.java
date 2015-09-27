@@ -4,27 +4,16 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T02_Product", id = "_id")
-public class Product extends Model {
-
+@Table(name = "T01_ShopRate", id = "_id")
+public class ShopRate extends Model {
     @Column(name = "Code")
     private String code;
     @Column(name = "ShopID")
     private long shopID;
-    @Column(name = "ProductName")
-    private String productName;
-    @Column(name = "ProductNameE")
-    private String productNameE;
-    @Column(name = "ProductGroupID")
-    private long productGroupID;
-    @Column(name = "Unit")
-    private String unit;
-    @Column(name = "Description")
-    private String Description;
-    @Column(name = "LikeCount")
-    private String likeCount;
-    @Column(name = "CommentCount")
-    private String commentCount;
+    @Column(name = "UserID")
+    private long userID;
+    @Column(name = "Rate")
+    private int rate;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -38,9 +27,10 @@ public class Product extends Model {
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
-    public Product() {
+    public ShopRate() {
         super();
     }
+
 
     public String getCode() {
         return code;
@@ -58,60 +48,20 @@ public class Product extends Model {
         this.shopID = shopID;
     }
 
-    public String getProductName() {
-        return productName;
+    public long getUserID() {
+        return userID;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setUserID(long userID) {
+        this.userID = userID;
     }
 
-    public String getProductNameE() {
-        return productNameE;
+    public int getRate() {
+        return rate;
     }
 
-    public void setProductNameE(String productNameE) {
-        this.productNameE = productNameE;
-    }
-
-    public long getProductGroupID() {
-        return productGroupID;
-    }
-
-    public void setProductGroupID(long productGroupID) {
-        this.productGroupID = productGroupID;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public String getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(String likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 
     public String getNote() {
