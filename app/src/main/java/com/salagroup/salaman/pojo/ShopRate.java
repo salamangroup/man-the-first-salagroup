@@ -1,32 +1,36 @@
 package com.salagroup.salaman.pojo;
 
-import java.io.Serializable;
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
-public class ShopRate implements Serializable {
-
-    private long _id;
+@Table(name = "T01_ShopRate", id = "_id")
+public class ShopRate extends Model {
+    @Column(name = "Code")
     private String code;
+    @Column(name = "ShopID")
     private long shopID;
+    @Column(name = "UserID")
     private long userID;
+    @Column(name = "Rate")
     private int rate;
+    @Column(name = "Note")
     private String note;
+    @Column(name = "Status")
     private boolean status;
+    @Column(name = "CreatedBy")
     private long createdBy;
+    @Column(name = "CreatedDateTime")
     private String createdDateTime;
+    @Column(name = "LastUpdatedBy")
     private long lastUpdatedBy;
+    @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
     public ShopRate() {
+        super();
     }
 
-    public long get_id() {
-
-        return _id;
-    }
-
-    public void set_id(long _id) {
-        this._id = _id;
-    }
 
     public String getCode() {
         return code;

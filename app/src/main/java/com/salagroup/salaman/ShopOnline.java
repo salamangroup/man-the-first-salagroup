@@ -2,16 +2,20 @@ package com.salagroup.salaman;
 
 import android.app.Application;
 
-import com.salagroup.salaman.data.SQLiteDatasource;
+import com.activeandroid.ActiveAndroid;
+
 
 public class ShopOnline extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
+        ActiveAndroid.initialize(this);
+    }
 
-        // copy database to device if not exits
-        SQLiteDatasource datasource = new SQLiteDatasource(getApplicationContext());
-        datasource.closeDBConnection();
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ActiveAndroid.dispose();
     }
 }

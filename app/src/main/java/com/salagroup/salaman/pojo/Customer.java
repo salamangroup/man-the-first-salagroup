@@ -4,28 +4,27 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T01_Shop", id = "_id")
-public class Shop extends Model {
+@Table(name = "T02_Customer", id = "_id")
+public class Customer extends Model {
+
     @Column(name = "Code")
     private String code;
-    @Column(name = "ShopName")
-    private String shopName;
     @Column(name = "UserID")
-    private long userID;
-    @Column(name = "Description")
-    private String description;
-    @Column(name = "InvoicePrefix")
-    private String invoicePrefix;
-    @Column(name = "TaxCode")
-    private String taxCode;
-    @Column(name = "Fax")
-    private String fax;
+    private String userID;
+    @Column(name = "ShopID")
+    private String shopID;
+    @Column(name = "CustomerName")
+    private String customerName;
+    @Column(name = "CustomerGroupID")
+    private long customerGroupID;
     @Column(name = "Email")
     private String email;
+    @Column(name = "Gender")
+    private int gender;
+    @Column(name = "Birthday")
+    private String birthday;
     @Column(name = "Phone")
     private String phone;
-    @Column(name = "Phone2")
-    private String phone2;
     @Column(name = "Address")
     private String address;
     @Column(name = "RegionL1")
@@ -40,22 +39,10 @@ public class Shop extends Model {
     private int regionL5;
     @Column(name = "RegionL6")
     private int regionL6;
-    @Column(name = "RegionL7")
-    private int regionL7;
     @Column(name = "Latitude")
     private double latitude;
     @Column(name = "Longitude")
     private double longitude;
-    @Column(name = "ContactName")
-    private String contactName;
-    @Column(name = "ContactJobTitle")
-    private String contactJobTitle;
-    @Column(name = "ContactEmail")
-    private String contactEmail;
-    @Column(name = "ContactPhone")
-    private String contactPhone;
-    @Column(name = "ContactAddress")
-    private String contactAddress;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -69,7 +56,7 @@ public class Shop extends Model {
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
-    public Shop() {
+    public Customer() {
         super();
     }
 
@@ -81,52 +68,36 @@ public class Shop extends Model {
         this.code = code;
     }
 
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
-    public long getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(long userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
-    public String getDescription() {
-        return description;
+    public String getShopID() {
+        return shopID;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setShopID(String shopID) {
+        this.shopID = shopID;
     }
 
-    public String getInvoicePrefix() {
-        return invoicePrefix;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setInvoicePrefix(String invoicePrefix) {
-        this.invoicePrefix = invoicePrefix;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public String getTaxCode() {
-        return taxCode;
+    public long getCustomerGroupID() {
+        return customerGroupID;
     }
 
-    public void setTaxCode(String taxCode) {
-        this.taxCode = taxCode;
-    }
-
-    public String getFax() {
-        return fax;
-    }
-
-    public void setFax(String fax) {
-        this.fax = fax;
+    public void setCustomerGroupID(long customerGroupID) {
+        this.customerGroupID = customerGroupID;
     }
 
     public String getEmail() {
@@ -137,20 +108,28 @@ public class Shop extends Model {
         this.email = email;
     }
 
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getPhone2() {
-        return phone2;
-    }
-
-    public void setPhone2(String phone2) {
-        this.phone2 = phone2;
     }
 
     public String getAddress() {
@@ -209,14 +188,6 @@ public class Shop extends Model {
         this.regionL6 = regionL6;
     }
 
-    public int getRegionL7() {
-        return regionL7;
-    }
-
-    public void setRegionL7(int regionL7) {
-        this.regionL7 = regionL7;
-    }
-
     public double getLatitude() {
         return latitude;
     }
@@ -231,46 +202,6 @@ public class Shop extends Model {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
-    public String getContactJobTitle() {
-        return contactJobTitle;
-    }
-
-    public void setContactJobTitle(String contactJobTitle) {
-        this.contactJobTitle = contactJobTitle;
-    }
-
-    public String getContactEmail() {
-        return contactEmail;
-    }
-
-    public void setContactEmail(String contactEmail) {
-        this.contactEmail = contactEmail;
-    }
-
-    public String getContactPhone() {
-        return contactPhone;
-    }
-
-    public void setContactPhone(String contactPhone) {
-        this.contactPhone = contactPhone;
-    }
-
-    public String getContactAddress() {
-        return contactAddress;
-    }
-
-    public void setContactAddress(String contactAddress) {
-        this.contactAddress = contactAddress;
     }
 
     public String getNote() {

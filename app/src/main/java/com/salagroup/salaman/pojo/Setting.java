@@ -4,20 +4,24 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T02_Industry", id = "_id")
-public class Industry extends Model {
-    @Column(name = "Code")
-    private String code;
-    @Column(name = "IndustryName")
-    private String industryName;
-    @Column(name = "IndustryNameE")
-    private String industryNameE;
-    @Column(name = "IndustryLevel")
-    private int industryLevel;
+@Table(name = "T00_Setting", id = "_id")
+public class Setting extends Model {
+    @Column(name = "CMCode")
+    private String cmCode;
+    @Column(name = "CDCode")
+    private String cdCode;
+    @Column(name = "CDName")
+    private String cdName;
+    @Column(name = "CDNameE")
+    private String cdNameE;
+    @Column(name = "FloatValue")
+    private float floatValue;
+    @Column(name = "IntValue")
+    private int intValue;
+    @Column(name = "DateTimeValue")
+    private String datetimeValue;
     @Column(name = "Ordinal")
     private int ordinal;
-    @Column(name = "ParentID")
-    private int parentID;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -30,42 +34,65 @@ public class Industry extends Model {
     private long lastUpdatedBy;
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
-    private boolean isChecked;
 
-    public Industry() {
+    public Setting() {
         super();
     }
 
-    public String getCode() {
-        return code;
+    public String getCmCode() {
+        return cmCode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCmCode(String cmCode) {
+        this.cmCode = cmCode;
     }
 
-    public String getIndustryName() {
-        return industryName;
+    public String getCdCode() {
+        return cdCode;
     }
 
-    public void setIndustryName(String industryName) {
-        this.industryName = industryName;
+    public void setCdCode(String cdCode) {
+        this.cdCode = cdCode;
     }
 
-    public String getIndustryNameE() {
-        return industryNameE;
+    public String getCdName() {
+        return cdName;
     }
 
-    public void setIndustryNameE(String industryNameE) {
-        this.industryNameE = industryNameE;
+    public void setCdName(String cdName) {
+        this.cdName = cdName;
     }
 
-    public int getIndustryLevel() {
-        return industryLevel;
+    public String getCdNameE() {
+        return cdNameE;
     }
 
-    public void setIndustryLevel(int industryLevel) {
-        this.industryLevel = industryLevel;
+    public void setCdNameE(String cdNameE) {
+        this.cdNameE = cdNameE;
+    }
+
+    public float getFloatValue() {
+        return floatValue;
+    }
+
+    public void setFloatValue(float floatValue) {
+        this.floatValue = floatValue;
+    }
+
+    public int getIntValue() {
+        return intValue;
+    }
+
+    public void setIntValue(int intValue) {
+        this.intValue = intValue;
+    }
+
+    public String getDatetimeValue() {
+        return datetimeValue;
+    }
+
+    public void setDatetimeValue(String datetimeValue) {
+        this.datetimeValue = datetimeValue;
     }
 
     public int getOrdinal() {
@@ -74,14 +101,6 @@ public class Industry extends Model {
 
     public void setOrdinal(int ordinal) {
         this.ordinal = ordinal;
-    }
-
-    public int getParentID() {
-        return parentID;
-    }
-
-    public void setParentID(int parentID) {
-        this.parentID = parentID;
     }
 
     public String getNote() {
@@ -130,13 +149,5 @@ public class Industry extends Model {
 
     public void setLastUpdatedDateTime(String lastUpdatedDateTime) {
         this.lastUpdatedDateTime = lastUpdatedDateTime;
-    }
-
-    public boolean isChecked() {
-        return isChecked;
-    }
-
-    public void setIsChecked(boolean isChecked) {
-        this.isChecked = isChecked;
     }
 }

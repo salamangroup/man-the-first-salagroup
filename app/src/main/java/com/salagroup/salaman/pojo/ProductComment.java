@@ -4,14 +4,17 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "T01_Shop_Industry", id = "_id")
-public class ShopIndustry extends Model {
+@Table(name = "T02_ProductComment", id = "_id")
+public class ProductComment extends Model {
+
     @Column(name = "Code")
     private String code;
-    @Column(name = "ShopID")
-    private long shopID;
-    @Column(name = "IndustryID")
-    private long industryID;
+    @Column(name = "UserID")
+    private long userID;
+    @Column(name = "ProductID")
+    private long productID;
+    @Column(name = "Comment")
+    private String comment;
     @Column(name = "Note")
     private String note;
     @Column(name = "Status")
@@ -25,7 +28,7 @@ public class ShopIndustry extends Model {
     @Column(name = "LastUpdatedDateTime")
     private String lastUpdatedDateTime;
 
-    public ShopIndustry() {
+    public ProductComment() {
         super();
     }
 
@@ -37,20 +40,28 @@ public class ShopIndustry extends Model {
         this.code = code;
     }
 
-    public long getShopID() {
-        return shopID;
+    public long getUserID() {
+        return userID;
     }
 
-    public void setShopID(long shopID) {
-        this.shopID = shopID;
+    public void setUserID(long userID) {
+        this.userID = userID;
     }
 
-    public long getIndustryID() {
-        return industryID;
+    public long getProductID() {
+        return productID;
     }
 
-    public void setIndustryID(long industryID) {
-        this.industryID = industryID;
+    public void setProductID(long productID) {
+        this.productID = productID;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getNote() {
