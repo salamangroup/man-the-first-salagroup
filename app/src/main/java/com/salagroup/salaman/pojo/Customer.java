@@ -3,6 +3,9 @@ package com.salagroup.salaman.pojo;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
+
+import java.util.List;
 
 @Table(name = "T02_Customer", id = "_id")
 public class Customer extends Model {
@@ -28,17 +31,17 @@ public class Customer extends Model {
     @Column(name = "Address")
     private String address;
     @Column(name = "RegionL1")
-    private int regionL1;
+    private long regionL1;
     @Column(name = "RegionL2")
-    private int regionL2;
+    private long regionL2;
     @Column(name = "RegionL3")
-    private int regionL3;
+    private long regionL3;
     @Column(name = "RegionL4")
-    private int regionL4;
+    private long regionL4;
     @Column(name = "RegionL5")
-    private int regionL5;
+    private long regionL5;
     @Column(name = "RegionL6")
-    private int regionL6;
+    private long regionL6;
     @Column(name = "Latitude")
     private double latitude;
     @Column(name = "Longitude")
@@ -140,51 +143,51 @@ public class Customer extends Model {
         this.address = address;
     }
 
-    public int getRegionL1() {
+    public long getRegionL1() {
         return regionL1;
     }
 
-    public void setRegionL1(int regionL1) {
+    public void setRegionL1(long regionL1) {
         this.regionL1 = regionL1;
     }
 
-    public int getRegionL2() {
+    public long getRegionL2() {
         return regionL2;
     }
 
-    public void setRegionL2(int regionL2) {
+    public void setRegionL2(long regionL2) {
         this.regionL2 = regionL2;
     }
 
-    public int getRegionL3() {
+    public long getRegionL3() {
         return regionL3;
     }
 
-    public void setRegionL3(int regionL3) {
+    public void setRegionL3(long regionL3) {
         this.regionL3 = regionL3;
     }
 
-    public int getRegionL4() {
+    public long getRegionL4() {
         return regionL4;
     }
 
-    public void setRegionL4(int regionL4) {
+    public void setRegionL4(long regionL4) {
         this.regionL4 = regionL4;
     }
 
-    public int getRegionL5() {
+    public long getRegionL5() {
         return regionL5;
     }
 
-    public void setRegionL5(int regionL5) {
+    public void setRegionL5(long regionL5) {
         this.regionL5 = regionL5;
     }
 
-    public int getRegionL6() {
+    public long getRegionL6() {
         return regionL6;
     }
 
-    public void setRegionL6(int regionL6) {
+    public void setRegionL6(long regionL6) {
         this.regionL6 = regionL6;
     }
 
@@ -250,5 +253,31 @@ public class Customer extends Model {
 
     public void setLastUpdatedDateTime(String lastUpdatedDateTime) {
         this.lastUpdatedDateTime = lastUpdatedDateTime;
+    }
+
+    public List<Customer> getAll() {
+        return new Select()
+                .from(Customer.class)
+                .where("Status = ?", 1)
+                .orderBy("CustomerName ASC")
+                .execute();
+    }
+
+    public static Customer getCustomerById(long _id) {
+
+            return new Select()
+                    .from(Customer.class)
+                    .where("_id = ?", _id)
+                    .executeSingle();
+    }
+
+    private boolean isChecked;
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean isChecked) {
+        this.isChecked = isChecked;
     }
 }

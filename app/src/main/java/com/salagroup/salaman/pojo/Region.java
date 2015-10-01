@@ -1,5 +1,7 @@
 package com.salagroup.salaman.pojo;
 
+import android.util.Log;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -151,5 +153,23 @@ public class Region extends Model implements Serializable {
 
     public static List<Region> getRegionByLevel(int regionLevel) {
         return new Select().from(Region.class).where("RegionLevel = ?", regionLevel).execute();
+    }
+
+    public static List<Region> getRegionByParentId(long parentId) {
+        return new Select().from(Region.class).where("ParentID = ?", parentId).execute();
+    }
+
+    public static List<Region> getNoneRegion() {
+        return new Select().from(Region.class).where("_id = ?", -1).execute();
+    }
+
+    public static String getRegionNameById(long id) {
+
+        Region region = new Select()
+                .from(Region.class)
+                .where("_id = ?", id)
+                .executeSingle();
+
+        return region.getRegionName().trim();
     }
 }

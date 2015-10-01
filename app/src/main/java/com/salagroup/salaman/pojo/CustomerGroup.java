@@ -3,6 +3,9 @@ package com.salagroup.salaman.pojo;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
+
+import java.util.List;
 
 @Table(name = "T02_CustomerGroup", id = "_id")
 public class CustomerGroup extends Model {
@@ -109,5 +112,22 @@ public class CustomerGroup extends Model {
 
     public void setLastUpdatedDateTime(String lastUpdatedDateTime) {
         this.lastUpdatedDateTime = lastUpdatedDateTime;
+    }
+
+    public List<CustomerGroup> getAll() {
+
+        return new Select()
+                .from(CustomerGroup.class)
+                .where("Status = ?", 0)
+                .orderBy("CustomerGroupName ASC")
+                .execute();
+    }
+
+    public static int getCustomerCountById(long id){
+
+        return new Select()
+                .from(Customer.class)
+                .where("CustomerGroupID = ? and Status = ?", id, 1)
+                .count();
     }
 }

@@ -2,83 +2,87 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/layoutRoot"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
+                android:id="@+id/tvNameCustomer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_fragment_customer"
-                android:id="@+id/tvNameCustomer"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/tvCountCustomer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_customer_item_count_example"
-                android:id="@+id/tvCountCustomer"
-                android:textColor="@color/colorAccent"
                 android:layout_marginLeft="@dimen/tv_detail_customer_margin_left"
                 android:layout_marginStart="@dimen/tv_detail_customer_margin_left"
-                android:textSize="20sp"/>
+                android:text="@string/fragment_customer_item_count_example"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_customer_item_address"
-                android:textColor="@color/colorPrimary"
-                android:id="@+id/textView2" />
+                android:textColor="@color/colorPrimary" />
 
             <TextView
+                android:id="@+id/tvAddressCustomer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_customer_item_name_example"
                 android:layout_marginLeft="@dimen/tv_detail_customer_margin_left"
                 android:layout_marginStart="@dimen/tv_detail_customer_margin_left"
-                android:id="@+id/tvAddressCustomer" />
+                android:text="@string/fragment_customer_item_name_example" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_customer_item_phone_number"
-                android:textColor="@color/colorPrimary"
-                android:id="@+id/textView4" />
+                android:textColor="@color/colorPrimary" />
 
             <TextView
+                android:id="@+id/tvPhoneCustomer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_customer_item_phone_example"
                 android:layout_marginLeft="@dimen/tv_detail_customer_margin_left"
                 android:layout_marginStart="@dimen/tv_detail_customer_margin_left"
-                android:id="@+id/tvPhoneCustomer" />
+                android:text="@string/fragment_customer_item_phone_example" />
 
         </LinearLayout>
 
+        <CheckBox
+            android:id="@+id/chkSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
     </LinearLayout>
-
-
-
 
 </LinearLayout>
