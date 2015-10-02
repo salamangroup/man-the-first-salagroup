@@ -70,6 +70,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         String diachi = customers.get(position).getAddress() + ", " + Region.getRegionNameById(customers.get(position).getRegionL5()) + ", " + Region.getRegionNameById(customers.get(position).getRegionL4());
         viewHolder.tvAddressCustomer.setText(diachi);
         viewHolder.tvPhoneCustomer.setText(customers.get(position).getPhone());
+        viewHolder.tvCountCustomer.setText("("+Customer.getInvoiceCountById(customers.get(position).getId())+")");
 
         //Delete MultiItem
         viewHolder.chkSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

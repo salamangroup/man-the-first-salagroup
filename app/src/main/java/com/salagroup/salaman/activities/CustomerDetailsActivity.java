@@ -82,6 +82,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
             Customer c = Customer.getCustomerById(_id);
 
             edtCustomerName.setText(c.getCustomerName());
+            edtCustomerName.setSelection(c.getCustomerName().length());
 
             edtCustomerPhone.setText(c.getPhone());
 

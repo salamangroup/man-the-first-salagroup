@@ -118,9 +118,17 @@ public class CustomerGroup extends Model {
 
         return new Select()
                 .from(CustomerGroup.class)
-                .where("Status = ?", 0)
+                .where("Status = ?", 1)
                 .orderBy("CustomerGroupName ASC")
                 .execute();
+    }
+
+    public static CustomerGroup getCustomerGroupById(long id){
+
+        return new Select()
+                .from(CustomerGroup.class)
+                .where("_id = ?", id)
+                .executeSingle();
     }
 
     public static int getCustomerCountById(long id){

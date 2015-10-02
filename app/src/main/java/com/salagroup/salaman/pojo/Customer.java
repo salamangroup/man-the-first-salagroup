@@ -271,6 +271,14 @@ public class Customer extends Model {
                     .executeSingle();
     }
 
+    public static int getInvoiceCountById(long id){
+
+        return new Select()
+                .from(SaleInvoice.class)
+                .where("CustomerID = ? and Status = ?", id, 1)
+                .count();
+    }
+
     private boolean isChecked;
 
     public boolean isChecked() {

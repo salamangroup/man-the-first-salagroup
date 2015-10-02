@@ -8,7 +8,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import com.salagroup.salaman.R;
 import com.salagroup.salaman.adapter.CustomerGroupAdapter;
+import com.salagroup.salaman.pojo.Customer;
 import com.salagroup.salaman.pojo.CustomerGroup;
 
 /**
@@ -37,6 +40,8 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_customer_group_list);
         mContext = this;
+
+
 
         TextView tvTitleCustomer = (TextView) findViewById(R.id.tvTitleCustomerGroup);
         setFontforTitle(tvTitleCustomer);
@@ -58,7 +63,88 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
             }
         });
 
+        lvCustomerGroup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
+                final CustomerGroup cg = CustomerGroup.getCustomerGroupById(mAdapter.getItem(position).getId());
+
+                PopupMenu popup = new PopupMenu(mContext, view);
+                popup.getMenuInflater().inflate(R.menu.popup_menu_customergroup, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()){
+
+                            case R.id.action_popup_update:
+
+                                LayoutInflater inflater = LayoutInflater.from(CustomerGroupListActivity.this);
+                                View mDialog = inflater.inflate(R.layout.dialog_add_group_customer,
+                                        (ViewGroup) findViewById(R.id.dialog_add_customer_group));
+
+                                edtCustomerGroup = (EditText) mDialog.findViewById(R.id.edtCustomerGroup);
+                                //TODO xử lý tên nhóm nhập vào
+
+                                edtCustomerGroup.setText(cg.getCustomerGroupName());
+                                edtCustomerGroup.setSelection(cg.getCustomerGroupName().length());
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(CustomerGroupListActivity.this);
+                                builder.setView(mDialog)
+                                        .setNegativeButton(getString(R.string.btn_customer_group_cancel), new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        })
+                                        .setPositiveButton(getString(R.string.btn_customer_group_save), new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+
+                                                cg.setCustomerGroupName(edtCustomerGroup.getText().toString());
+                                                cg.save();
+
+                                                mAdapter = new CustomerGroupAdapter(mContext, new CustomerGroup().getAll());
+                                                lvCustomerGroup.setAdapter(mAdapter);
+
+                                                Snackbar.make(customerGroupLayout, getString(R.string.notification_add_customer_group_ok),
+                                                        Snackbar.LENGTH_LONG).show();
+                                            }
+                                        }).show();
+
+                                return true;
+
+                            case R.id.action_popup_delete:
+
+                                new AlertDialog.Builder(mContext)
+                                        .setTitle("Xóa nhóm khách hàng \""+cg.getCustomerGroupName()+"\"?")
+                                        .setCancelable(true)
+                                        .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+
+                                                cg.setStatus(false);
+                                                cg.save();
+
+                                                mAdapter = new CustomerGroupAdapter(mContext, new CustomerGroup().getAll());
+                                                lvCustomerGroup.setAdapter(mAdapter);
+
+                                                Snackbar.make(customerGroupLayout, "Đã xóa nhóm khách hàng",
+                                                        Snackbar.LENGTH_LONG).show();
+                                            }
+                                        })
+                                        .setNegativeButton("Không", null)
+                                        .show();
+
+                                return true;
+                        }
+
+                        return false;
+                    }
+                });
+                popup.show();//showing popup menu
+            }
+        });
     }
 
     @Override
@@ -105,7 +191,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
         }
     }
 
-    public void setFontforTitle(TextView tvTitleCustomer){
+    public void setFontforTitle(TextView tvTitleCustomer) {
         Typeface robotoFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
         tvTitleCustomer.setTypeface(robotoFont);
     }
