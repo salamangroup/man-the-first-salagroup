@@ -2,12 +2,14 @@ package com.salagroup.salaman.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -20,7 +22,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.salagroup.salaman.R;
-import com.salagroup.salaman.activities.CustomerDetailsActivity;
 import com.salagroup.salaman.adapter.CustomerAdapter;
 import com.salagroup.salaman.pojo.Customer;
 
@@ -30,7 +31,7 @@ import java.util.List;
 /**
  * Created by TrytoThuan on 14/09/2015.
  */
-public class CustomerListFragment extends Fragment implements ActionMode.Callback{
+public class CustomerListFragment extends Fragment implements ActionMode.Callback {
 
     private FloatingActionButton fabAddCustomer;
     private LinearLayout customerLayout;
@@ -71,7 +72,7 @@ public class CustomerListFragment extends Fragment implements ActionMode.Callbac
             @Override
             public void onClick(View v) {
 
-                startCustomerDetailsActivity(-1);
+                startCustomerDetailsFragment(-1);
             }
         });
     }
@@ -101,17 +102,37 @@ public class CustomerListFragment extends Fragment implements ActionMode.Callbac
         tvTitleCustomer.setTypeface(robotoFont);
     }
 
-    public void startCustomerDetailsActivity(long id) {
+    public void startCustomerDetailsFragment(long id) {
 
-        Intent intent = new Intent(this.getActivity(), CustomerDetailsActivity.class);
-        intent.putExtra("id", id);
-        startActivity(intent);
+//        Intent intent = new Intent(this.getActivity(), CustomerDetailsFragment.class);
+//        intent.putExtra("id", id);
+//        startActivity(intent);
+
+        Fragment detailFragment = new CustomerDetailsFragment();
+
+
+        Bundle mBundle = new Bundle();
+        mBundle.putLong("id", id);
+        detailFragment.setArguments(mBundle);
+
+        final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        //check if the device is landscape or portrait
+        Configuration configuration = getActivity().getResources().getConfiguration();
+        int ori = configuration.orientation;
+
+        fragmentTransaction.replace(R.id.container, detailFragment);
+
+        fragmentTransaction.addToBackStack(null);
+
+        fragmentTransaction.commit();
     }
 
     //region Multidelete
     public ActionMode actionMode;
 
-    public void startActionMode(){
+    public void startActionMode() {
 
         actionMode = getActivity().startActionMode(CustomerListFragment.this);
     }

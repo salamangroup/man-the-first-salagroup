@@ -134,7 +134,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
             public void onClick(View v) {
 
                 if (mCustomerListFragment.actionMode == null) {
-                    mCustomerListFragment.startCustomerDetailsActivity(customers.get(position).getId());
+                    mCustomerListFragment.startCustomerDetailsFragment(customers.get(position).getId());
                 } else {
                     viewHolder.chkSelect.setChecked(!viewHolder.chkSelect.isChecked());
                 }

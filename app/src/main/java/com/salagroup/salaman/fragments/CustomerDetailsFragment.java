@@ -1,12 +1,14 @@
-package com.salagroup.salaman.activities;
+package com.salagroup.salaman.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,7 +33,7 @@ import java.util.StringTokenizer;
 /**
  * Created by TrytoThuan on 14/09/2015.
  */
-public class CustomerDetailsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class CustomerDetailsFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private LinearLayout customerInfoLayout;
     private TextView tvTitleCustomerInfo;
@@ -50,15 +52,38 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
     private long _id;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_customer_detail);
-        mContext = this;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        _id = getIntent().getLongExtra("id", -1);
-        initFindView(); // FindViewById()
+        View view = inflater.inflate(R.layout.fragment_customer_detail, container, false);
 
-        tvTitleCustomerInfo = (TextView) findViewById(R.id.tvTitleCustomerInfo);
+        edtCustomerName = (EditText) view.findViewById(R.id.edtCustomerName);
+        edtCustomerPhone = (EditText) view.findViewById(R.id.edtCustomerPhone);
+        edtAddress = (EditText) view.findViewById(R.id.edtAddress);
+
+        spnProvince_City = (CustomSpinner) view.findViewById(R.id.spnProvince_City);
+        spnDistrict = (CustomSpinner) view.findViewById(R.id.spnDistrict);
+        spnCustomerGroup = (Spinner) view.findViewById(R.id.spnCustomerGroup);
+
+        dpkBirthday = (DatePicker) view.findViewById(R.id.dpkBirthday);
+
+        rdgGenderType = (RadioGroup) view.findViewById(R.id.rdgGenderType);
+
+        btnCusDetailCancel = (Button) view.findViewById(R.id.btnCusDetailCancel);
+        btnCusDetailDelete = (Button) view.findViewById(R.id.btnCusDetailDelete);
+        btnCusDetailUpdate = (Button) view.findViewById(R.id.btnCusDetailUpdate);
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mContext = this.getActivity();
+
+        _id = getArguments().getLong("id");
+
+        tvTitleCustomerInfo = (TextView) getActivity().findViewById(R.id.tvTitleCustomerInfo);
         setFontforTitle(tvTitleCustomerInfo);
 
         btnCusDetailCancel.setOnClickListener(this);
@@ -70,7 +95,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
         spnProvince_City.setOnItemSelectedListener(this);
         spnDistrict.setOnItemSelectedListener(this);
 
-        cgSpinnerAdapter = new CustomerGroupSpinnerAdapter(mContext, new CustomerGroup().getAllActive());
+        cgSpinnerAdapter = new CustomerGroupSpinnerAdapter(mContext, CustomerGroup.getAllActive());
         spnCustomerGroup.setAdapter(cgSpinnerAdapter);
 
         if (_id == -1) {
@@ -86,23 +111,23 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
 
             edtCustomerPhone.setText(c.getPhone());
 
-            for (int i = 0; i < provincialsAdapter.getCount(); i++) {
+            for (int i = 0; i < provincialsAdapter.regions.size(); i++) {
 
-                if (provincialsAdapter.getItem(i).getId() == c.getRegionL4()) {
+                if (provincialsAdapter.regions.get(i).getId() == c.getRegionL4()) {
 
                     spnProvince_City.setSelection(i);
-                    initQuanHuyen(provincialsAdapter.getItem(i).getId());
+                    initQuanHuyen(provincialsAdapter.regions.get(i).getId());
                     break;
                 }
             }
-            for (int i = 0; i < districtsAdapter.getCount(); i++) {
-
-                if (districtsAdapter.getItem(i).getId() == c.getRegionL5()) {
-
-                    spnDistrict.setSelection(i);
-                    break;
-                }
-            }
+//            for (int i = 0; i < districtsAdapter.getCount(); i++) {
+//
+//                if (districtsAdapter.getItem(i).getId() == c.getRegionL5()) {
+//
+//                    spnDistrict.setSelection(i);
+//                    break;
+//                }
+//            }
             edtAddress.setText(c.getAddress());
 
             StringTokenizer tokenizer = new StringTokenizer(c.getBirthday(), "-");
@@ -195,9 +220,9 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
             if (_id != -1) {
 
                 Customer c = Customer.getCustomerById(_id);
-                for (int i = 0; i < districtsAdapter.getCount(); i++) {
+                for (int i = 0; i < districtsAdapter.regions.size(); i++) {
 
-                    if (districtsAdapter.getItem(i).getId() == c.getRegionL5()) {
+                    if (districtsAdapter.regions.get(i).getId() == c.getRegionL5()) {
 
                         spnDistrict.setSelection(i);
                         break;
@@ -224,7 +249,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
         switch (v.getId()) {
             case R.id.btnCusDetailCancel:
 
-                finish();
+                getActivity().onBackPressed();
 
                 break;
             case R.id.btnCusDetailDelete:
@@ -240,7 +265,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
                                 c.save();
 
 //                                setResult(-2);
-                                finish();
+                                getActivity().onBackPressed();
                             }
                         })
                         .setNegativeButton("Không", null)
@@ -255,7 +280,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
                     c = Customer.getCustomerById(_id);
                 }
 
-                c.setCustomerName(edtCustomerName.getText().toString());
+                c.setCustomerName(String.valueOf(edtCustomerName.getText()));
 
                 c.setPhone(edtCustomerPhone.getText().toString());
 
@@ -305,33 +330,14 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
                 c.save();
 
 //                setResult(RESULT_OK);
-                finish();
+                getActivity().onBackPressed();
 
                 break;
         }
     }
 
-    private void initFindView() {
-
-        edtCustomerName = (EditText) findViewById(R.id.edtCustomerName);
-        edtCustomerPhone = (EditText) findViewById(R.id.edtCustomerPhone);
-        edtAddress = (EditText) findViewById(R.id.edtAddress);
-
-        spnProvince_City = (CustomSpinner) findViewById(R.id.spnProvince_City);
-        spnDistrict = (CustomSpinner) findViewById(R.id.spnDistrict);
-        spnCustomerGroup = (Spinner) findViewById(R.id.spnCustomerGroup);
-
-        dpkBirthday = (DatePicker) findViewById(R.id.dpkBirthday);
-
-        rdgGenderType = (RadioGroup) findViewById(R.id.rdgGenderType);
-
-        btnCusDetailCancel = (Button) findViewById(R.id.btnCusDetailCancel);
-        btnCusDetailDelete = (Button) findViewById(R.id.btnCusDetailDelete);
-        btnCusDetailUpdate = (Button) findViewById(R.id.btnCusDetailUpdate);
-    }
-
     public void setFontforTitle(TextView tvTitleCustomer) {
-        Typeface robotoFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
+        Typeface robotoFont = Typeface.createFromAsset(this.getActivity().getAssets(), "fonts/Roboto-Light.ttf");
         tvTitleCustomer.setTypeface(robotoFont);
     }
 }
