@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,12 +15,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.activeandroid.Cache;
 import com.salagroup.salaman.R;
 import com.salagroup.salaman.adapter.IndustryAdapter;
 import com.salagroup.salaman.adapter.MyRegionAdapter;
-import com.salagroup.salaman.helper.StringHelper;
-import com.salagroup.salaman.pojo.Customer;
+import com.salagroup.salaman.helper.ValidationHelper;
 import com.salagroup.salaman.pojo.Industry;
 import com.salagroup.salaman.pojo.Region;
 import com.salagroup.salaman.pojo.Shop;
@@ -199,7 +196,7 @@ public class CreateShopActivity extends AppCompatActivity
             ok = false;
             edtTenCuaHang.setError("Vui lòng nhập tên của hàng.(2 kí tự trở lên)");
             edtTenCuaHang.requestFocus();
-        } else if (!StringHelper.isViString(shopName)) {
+        } else if (!ValidationHelper.isViString(shopName)) {
             ok = false;
             edtTenCuaHang.setError("Vui lòng nhập tên của hàng chỉ gồm chữ cái, chữ số, kí tự _,-, khoảng trắng.");
             edtTenCuaHang.requestFocus();

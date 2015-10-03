@@ -7,7 +7,7 @@ import com.activeandroid.query.Select;
 
 import java.util.List;
 
-@Table(name = "T01" +        "_Industry", id = "_id")
+@Table(name = "T01" + "_Industry", id = "_id")
 public class Industry extends Model {
     @Column(name = "Code")
     private String code;

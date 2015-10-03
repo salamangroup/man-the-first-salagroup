@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.salagroup.salaman.R;
 import com.salagroup.salaman.pojo.CustomerGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerGroupAdapter extends ArrayAdapter<CustomerGroup> {
@@ -16,9 +17,9 @@ public class CustomerGroupAdapter extends ArrayAdapter<CustomerGroup> {
     private static final int LAYOUT_RESOURCE = R.layout.custom_item_fragment_customer_group;
 
     private Context context;
-    private List<CustomerGroup> customerGroups;
+    public List<CustomerGroup> customerGroups;
 
-    public void setCustomerGroups(List<CustomerGroup> customerGroups) {
+    public void setModel(List<CustomerGroup> customerGroups) {
         this.customerGroups = customerGroups;
     }
 
@@ -34,6 +35,14 @@ public class CustomerGroupAdapter extends ArrayAdapter<CustomerGroup> {
         super(context, LAYOUT_RESOURCE, customerGroups);
         this.context = context;
         this.customerGroups = customerGroups;
+    }
+
+    @Override
+    public int getCount() {
+        if (customerGroups != null) {
+            return customerGroups.size();
+        }
+        return 0;
     }
 
     @Override
