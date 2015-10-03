@@ -30,6 +30,7 @@ public class ProductComment extends Model {
 
     public ProductComment() {
         super();
+        this.status = true;
     }
 
     public String getCode() {

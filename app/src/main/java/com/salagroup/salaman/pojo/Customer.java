@@ -61,6 +61,7 @@ public class Customer extends Model {
 
     public Customer() {
         super();
+        this.status = true;
     }
 
     public String getCode() {
@@ -265,10 +266,10 @@ public class Customer extends Model {
 
     public static Customer getCustomerById(long _id) {
 
-            return new Select()
-                    .from(Customer.class)
-                    .where("_id = ?", _id)
-                    .executeSingle();
+        return new Select()
+                .from(Customer.class)
+                .where("_id = ?", _id)
+                .executeSingle();
     }
 
     public static int getInvoiceCountById(long id){

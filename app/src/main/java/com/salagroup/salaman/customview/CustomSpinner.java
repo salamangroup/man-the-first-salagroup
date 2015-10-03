@@ -1,6 +1,5 @@
 package com.salagroup.salaman.customview;
 
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Spinner;

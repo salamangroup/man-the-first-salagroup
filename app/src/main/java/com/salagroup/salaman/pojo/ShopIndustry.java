@@ -27,6 +27,7 @@ public class ShopIndustry extends Model {
 
     public ShopIndustry() {
         super();
+        this.status = true;
     }
 
     public String getCode() {

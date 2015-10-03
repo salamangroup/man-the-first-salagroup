@@ -43,6 +43,7 @@ public class SaleInvoice extends Model {
 
     public SaleInvoice() {
         super();
+        this.status = true;
     }
 
     public long getUserID() {

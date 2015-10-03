@@ -41,6 +41,7 @@ public class SalesInvoiceDetail extends Model {
 
     public SalesInvoiceDetail() {
         super();
+        this.status = true;
     }
 
     public long getID() {

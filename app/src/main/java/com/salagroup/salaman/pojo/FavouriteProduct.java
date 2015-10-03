@@ -25,6 +25,7 @@ public class FavouriteProduct extends Model {
 
     public FavouriteProduct() {
         super();
+        this.status = true;
     }
 
     public long getUserID() {

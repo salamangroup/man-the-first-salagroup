@@ -3,8 +3,11 @@ package com.salagroup.salaman.pojo;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
-@Table(name = "T02_Industry", id = "_id")
+import java.util.List;
+
+@Table(name = "T01" +        "_Industry", id = "_id")
 public class Industry extends Model {
     @Column(name = "Code")
     private String code;
@@ -138,5 +141,9 @@ public class Industry extends Model {
 
     public void setIsChecked(boolean isChecked) {
         this.isChecked = isChecked;
+    }
+
+    public static List<Industry> getAllIndustry() {
+        return new Select().from(Industry.class).execute();
     }
 }

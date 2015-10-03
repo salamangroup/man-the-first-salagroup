@@ -31,6 +31,7 @@ public class Topic extends Model {
 
     public Topic() {
         super();
+        this.status = true;
     }
 
     public String getCode() {

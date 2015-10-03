@@ -14,10 +14,10 @@
 
         <meta-data
             android:name="AA_DB_NAME"
-            android:value="saladb_2015_09_18" />
+            android:value="saladb_2015_10_04" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="1" />
+            android:value="2" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -31,15 +31,11 @@
             android:name=".activities.MainScreenActivity"
             android:label="@string/title_activity_main_screen" />
 
-        <activity android:name=".activities.CustomerListActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".activities.CustomerListActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
-        <activity android:name=".activities.CustomerGroupListActivity" >
+        <activity android:name=".activities.CustomerGroupListActivity">
 
         </activity>
 
@@ -59,6 +55,15 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+        <activity
+            android:name=".activities.CreateShopActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -62,6 +62,7 @@ public class User extends Model {
 
     public User() {
         super();
+        this.status = true;
     }
 
     public String getCode() {

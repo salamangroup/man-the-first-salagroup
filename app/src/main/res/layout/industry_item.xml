@@ -9,14 +9,6 @@
         android:id="@+id/ckbIndustry"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
-
-    <TextView
-        android:id="@+id/tvIndustryName"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:paddingLeft="8dp"
-        android:text="@string/hello_world" />
-
+        android:layout_gravity="center"
+        android:text="@string/app_name" />
 </LinearLayout>
