@@ -259,6 +259,13 @@ public class Customer extends Model {
     public static List<Customer> getAll() {
         return new Select()
                 .from(Customer.class)
+                .orderBy("CustomerName ASC")
+                .execute();
+    }
+
+    public static List<Customer> getAllActive() {
+        return new Select()
+                .from(Customer.class)
                 .where("Status = ?", 1)
                 .orderBy("CustomerName ASC")
                 .execute();

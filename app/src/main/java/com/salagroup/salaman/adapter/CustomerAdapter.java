@@ -26,10 +26,10 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
     private static final int LAYOUT_RESOURCE = R.layout.custom_item_fragment_customer;
 
     private Context context;
-    private List<Customer> customers;
+    public List<Customer> customers;
     private CustomerListActivity mCustomerListActivity;
 
-    public void setCustomers(List<Customer> customers) {
+    public void setModel(List<Customer> customers) {
         this.customers = customers;
     }
 
@@ -49,6 +49,14 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         this.context = context;
         this.customers = customers;
         this.mCustomerListActivity = (CustomerListActivity) context;
+    }
+
+    @Override
+    public int getCount() {
+        if (customers != null) {
+            return customers.size();
+        }
+        return 0;
     }
 
     @Override
@@ -76,7 +84,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         viewHolder.tvPhoneCustomer.setText(customers.get(position).getPhone());
         viewHolder.tvCountCustomer.setText("("+Customer.getInvoiceCountById(customers.get(position).getId())+")");
 
-        //Delete MultiItem
+        //region Multidelete
         viewHolder.chkSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -142,6 +150,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
                 return true;
             }
         });
+        //endregion
 
         convertView.setBackgroundResource(R.drawable.view_touch_selector);
 

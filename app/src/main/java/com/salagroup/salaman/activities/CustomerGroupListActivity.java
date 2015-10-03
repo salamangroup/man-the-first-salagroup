@@ -21,7 +21,6 @@ import android.widget.TextView;
 
 import com.salagroup.salaman.R;
 import com.salagroup.salaman.adapter.CustomerGroupAdapter;
-import com.salagroup.salaman.pojo.Customer;
 import com.salagroup.salaman.pojo.CustomerGroup;
 
 import java.util.List;
@@ -50,6 +49,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
         ListView lvCustomerGroup = (ListView) findViewById(R.id.lvAddCustomerGroup);
         FloatingActionButton fabAddCustomerGroup = (FloatingActionButton) findViewById(R.id.fabAddCustomerGroup);
 
+//        mAdapter = new CustomerGroupAdapter(mContext, (ArrayList<CustomerGroup>)customerGroups);
         mAdapter = new CustomerGroupAdapter(mContext, CustomerGroup.getAll());
         lvCustomerGroup.setAdapter(mAdapter);
 
@@ -67,7 +67,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                final CustomerGroup cg = CustomerGroup.getCustomerGroupById(mAdapter.getItem(position).getId());
+
 
                 PopupMenu popup = new PopupMenu(mContext, view);
                 popup.getMenuInflater().inflate(R.menu.popup_menu_customergroup, popup.getMenu());
@@ -75,6 +75,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
 
+                        final CustomerGroup cg = CustomerGroup.getCustomerGroupById(mAdapter.customerGroups.get(position).getId());
                         switch (item.getItemId()) {
 
                             case R.id.action_popup_update:
@@ -101,13 +102,14 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
 
+
                                                 cg.setCustomerGroupName(edtCustomerGroup.getText().toString());
                                                 cg.save();
 
-                                                mAdapter.setCustomerGroups(CustomerGroup.getAll());
+                                                mAdapter.setModel(CustomerGroup.getAll());
                                                 mAdapter.notifyDataSetChanged();
 
-                                                Snackbar.make(customerGroupLayout, getString(R.string.notification_add_customer_group_ok),
+                                                Snackbar.make(customerGroupLayout, "Cập nhật thành công",
                                                         Snackbar.LENGTH_LONG).show();
                                             }
                                         }).show();
@@ -125,7 +127,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                                                 cg.setStatus(false);
                                                 cg.save();
 
-                                                mAdapter.setCustomerGroups(CustomerGroup.getAll());
+                                                mAdapter.setModel(CustomerGroup.getAll());
                                                 mAdapter.notifyDataSetChanged();
 
                                                 Snackbar.make(customerGroupLayout, "Đã xóa nhóm khách hàng",
@@ -175,7 +177,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                                 cg.setStatus(true);
                                 cg.save();
 
-                                mAdapter.setCustomerGroups(CustomerGroup.getAll());
+                                mAdapter.setModel(CustomerGroup.getAll());
                                 mAdapter.notifyDataSetChanged();
 
                                 Snackbar.make(customerGroupLayout, getString(R.string.notification_add_customer_group_ok),

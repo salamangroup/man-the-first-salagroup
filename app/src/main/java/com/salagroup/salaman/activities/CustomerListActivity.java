@@ -10,20 +10,18 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.salagroup.salaman.R;
-import com.salagroup.salaman.SystemInfo;
 import com.salagroup.salaman.adapter.CustomerAdapter;
 import com.salagroup.salaman.pojo.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,8 +32,8 @@ public class CustomerListActivity extends AppCompatActivity {
     private FloatingActionButton fabAddCustomer;
     private LinearLayout customerLayout;
     private CustomerAdapter mAdapter;
-    private ListView lvCustomer;
     private Context mContext;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +45,9 @@ public class CustomerListActivity extends AppCompatActivity {
         setFontforTitle(tvTitleCustomer);
 
         customerLayout = (LinearLayout) findViewById(R.id.customerLayout);
-        lvCustomer = (ListView) findViewById(R.id.lvAddCustomer);
+        ListView lvCustomer = (ListView) findViewById(R.id.lvAddCustomer);
 
-        mAdapter = new CustomerAdapter(this, Customer.getAll());
+        mAdapter = new CustomerAdapter(this, Customer.getAllActive());
         lvCustomer.setAdapter(mAdapter);
 
         fabAddCustomer = (FloatingActionButton) findViewById(R.id.fabAddCustomer);
@@ -69,15 +67,15 @@ public class CustomerListActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK) {
 
-            mAdapter.setCustomers(Customer.getAll());
-            lvCustomer.setAdapter(mAdapter);
+            mAdapter.setModel(Customer.getAllActive());
+            mAdapter.notifyDataSetChanged();
 
             Snackbar.make(customerLayout, "Cập nhật thành công...", Snackbar.LENGTH_LONG).show();
         }
         if (resultCode == -2) {
 
-            mAdapter.setCustomers(Customer.getAll());
-            lvCustomer.setAdapter(mAdapter);
+            mAdapter.setModel(Customer.getAllActive());
+            mAdapter.notifyDataSetChanged();
 
             Snackbar.make(customerLayout, "Đã xóa khách hàng...", Snackbar.LENGTH_LONG).show();
         }
@@ -95,7 +93,7 @@ public class CustomerListActivity extends AppCompatActivity {
         startActivityForResult(intent, 0);
     }
 
-    //Delete MultiItem
+    //region Multidelete
     public ActionMode actionMode;
     public ActionMode.Callback callback = new ActionMode.Callback() {
 
@@ -120,21 +118,46 @@ public class CustomerListActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
-                                    for (int i = mAdapter.getCount() - 1; i >= 0; i--) {
+                                    final ArrayList<Long> undoLists = new ArrayList<Long>();
 
-                                        if (mAdapter.getItem(i).isChecked()) {
+                                    for (int i = mAdapter.customers.size() - 1; i >= 0; i--) {
 
-                                            long id = mAdapter.getItem(i).getId();
+                                        if (mAdapter.customers.get(i).isChecked()) {
+
+                                            long id = mAdapter.customers.get(i).getId();
                                             Customer c = Customer.getCustomerById(id);
                                             c.setStatus(false);
                                             c.save();
+
+                                            undoLists.add(id);
                                         }
                                     }
 
-                                    mAdapter.setCustomers(Customer.getAll());
-                                    lvCustomer.setAdapter(mAdapter);
+                                    mAdapter.setModel(Customer.getAllActive());
+                                    mAdapter.notifyDataSetChanged();
 
-                                    Snackbar.make(customerLayout, "Đã xóa " + actionMode.getTitle() + "...", Snackbar.LENGTH_LONG).show();
+                                    Snackbar.make(customerLayout, "Đã xóa " + actionMode.getTitle() + "...", Snackbar.LENGTH_LONG)
+                                            .setAction("Hoàn tác", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+
+                                                    List<Customer> customers = Customer.getAll();
+                                                    for (int i = 0; i < customers.size(); i++) {
+
+                                                        if (undoLists.contains(customers.get(i).getId())) {
+
+                                                            long id = customers.get(i).getId();
+                                                            Customer c = Customer.getCustomerById(id);
+                                                            c.setStatus(true);
+                                                            c.save();
+                                                        }
+                                                    }
+
+                                                    mAdapter.setModel(Customer.getAllActive());
+                                                    mAdapter.notifyDataSetChanged();
+                                                }
+                                            })
+                                            .show();
 
                                     if (actionMode != null) {
 
@@ -147,12 +170,12 @@ public class CustomerListActivity extends AppCompatActivity {
 
                 case R.id.action_select_all:
 
-                    for (int i = 0; i < mAdapter.getCount(); i++) {
+                    for (int i = 0; i < mAdapter.customers.size(); i++) {
 
-                        mAdapter.getItem(i).setChecked(true);
+                        mAdapter.customers.get(i).setChecked(true);
                     }
-                    mAdapter.setCustomers(Customer.getAll());
-                    lvCustomer.setAdapter(mAdapter);
+                    mAdapter.setModel(Customer.getAllActive());
+                    mAdapter.notifyDataSetChanged();
                     return true;
             }
             return false;
@@ -169,13 +192,14 @@ public class CustomerListActivity extends AppCompatActivity {
 
             actionMode = null;
             fabAddCustomer.setVisibility(View.VISIBLE);
-            for (int i = 0; i < mAdapter.getCount(); i++) {
+            for (int i = 0; i < mAdapter.customers.size(); i++) {
 
-                mAdapter.getItem(i).setChecked(false);
+                mAdapter.customers.get(i).setChecked(false);
             }
-            mAdapter.setCustomers(Customer.getAll());
-            lvCustomer.setAdapter(mAdapter);
+            mAdapter.setModel(Customer.getAllActive());
+            mAdapter.notifyDataSetChanged();
         }
 
     };
+    //endregion
 }
