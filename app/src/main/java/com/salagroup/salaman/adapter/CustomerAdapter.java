@@ -29,6 +29,10 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
     private List<Customer> customers;
     private CustomerListActivity mCustomerListActivity;
 
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
     private class ViewHolder {
 
         TextView tvNameCustomer;

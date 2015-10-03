@@ -255,7 +255,7 @@ public class Customer extends Model {
         this.lastUpdatedDateTime = lastUpdatedDateTime;
     }
 
-    public List<Customer> getAll() {
+    public static List<Customer> getAll() {
         return new Select()
                 .from(Customer.class)
                 .where("Status = ?", 1)

@@ -24,6 +24,8 @@ import com.salagroup.salaman.adapter.CustomerGroupAdapter;
 import com.salagroup.salaman.pojo.Customer;
 import com.salagroup.salaman.pojo.CustomerGroup;
 
+import java.util.List;
+
 /**
  * Created by TrytoThuan on 14/09/2015.
  */
@@ -33,7 +35,6 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
     private EditText edtCustomerGroup;
     private Context mContext;
     private CustomerGroupAdapter mAdapter;
-    private ListView lvCustomerGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +43,14 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
         mContext = this;
 
 
-
         TextView tvTitleCustomer = (TextView) findViewById(R.id.tvTitleCustomerGroup);
         setFontforTitle(tvTitleCustomer);
 
         customerGroupLayout = (LinearLayout) findViewById(R.id.customerGroupLayout);
-        lvCustomerGroup = (ListView) findViewById(R.id.lvAddCustomerGroup);
+        ListView lvCustomerGroup = (ListView) findViewById(R.id.lvAddCustomerGroup);
         FloatingActionButton fabAddCustomerGroup = (FloatingActionButton) findViewById(R.id.fabAddCustomerGroup);
 
-        mAdapter = new CustomerGroupAdapter(mContext, new CustomerGroup().getAll());
+        mAdapter = new CustomerGroupAdapter(mContext, CustomerGroup.getAll());
         lvCustomerGroup.setAdapter(mAdapter);
 
         fabAddCustomerGroup.setOnClickListener(this);
@@ -75,7 +75,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
 
-                        switch (item.getItemId()){
+                        switch (item.getItemId()) {
 
                             case R.id.action_popup_update:
 
@@ -101,12 +101,11 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
 
-
                                                 cg.setCustomerGroupName(edtCustomerGroup.getText().toString());
                                                 cg.save();
 
-                                                mAdapter = new CustomerGroupAdapter(mContext, new CustomerGroup().getAll());
-                                                lvCustomerGroup.setAdapter(mAdapter);
+                                                mAdapter.setCustomerGroups(CustomerGroup.getAll());
+                                                mAdapter.notifyDataSetChanged();
 
                                                 Snackbar.make(customerGroupLayout, getString(R.string.notification_add_customer_group_ok),
                                                         Snackbar.LENGTH_LONG).show();
@@ -118,7 +117,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                             case R.id.action_popup_delete:
 
                                 new AlertDialog.Builder(mContext)
-                                        .setTitle("Xóa nhóm khách hàng \""+cg.getCustomerGroupName()+"\"?")
+                                        .setTitle("Xóa nhóm khách hàng \"" + cg.getCustomerGroupName() + "\"?")
                                         .setCancelable(true)
                                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
@@ -126,8 +125,8 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                                                 cg.setStatus(false);
                                                 cg.save();
 
-                                                mAdapter = new CustomerGroupAdapter(mContext, new CustomerGroup().getAll());
-                                                lvCustomerGroup.setAdapter(mAdapter);
+                                                mAdapter.setCustomerGroups(CustomerGroup.getAll());
+                                                mAdapter.notifyDataSetChanged();
 
                                                 Snackbar.make(customerGroupLayout, "Đã xóa nhóm khách hàng",
                                                         Snackbar.LENGTH_LONG).show();
@@ -173,14 +172,11 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
 
                                 CustomerGroup cg = new CustomerGroup();
                                 cg.setCustomerGroupName(edtCustomerGroup.getText().toString());
+                                cg.setStatus(true);
                                 cg.save();
 
-                                //TODO research how to notifyDataSetChanged()
-//                                List<CustomerGroup> customerGroups = new CustomerGroup().getAll();
-//                                mAdapter.setCustomerGroups(customerGroups);
-//                                mAdapter.notifyDataSetChanged();
-                                mAdapter = new CustomerGroupAdapter(mContext, new CustomerGroup().getAll());
-                                lvCustomerGroup.setAdapter(mAdapter);
+                                mAdapter.setCustomerGroups(CustomerGroup.getAll());
+                                mAdapter.notifyDataSetChanged();
 
                                 Snackbar.make(customerGroupLayout, getString(R.string.notification_add_customer_group_ok),
                                         Snackbar.LENGTH_LONG).show();

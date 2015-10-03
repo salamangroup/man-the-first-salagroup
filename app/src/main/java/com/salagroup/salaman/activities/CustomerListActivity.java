@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.salagroup.salaman.R;
+import com.salagroup.salaman.SystemInfo;
 import com.salagroup.salaman.adapter.CustomerAdapter;
 import com.salagroup.salaman.pojo.Customer;
 
@@ -48,7 +49,7 @@ public class CustomerListActivity extends AppCompatActivity {
         customerLayout = (LinearLayout) findViewById(R.id.customerLayout);
         lvCustomer = (ListView) findViewById(R.id.lvAddCustomer);
 
-        mAdapter = new CustomerAdapter(this, new Customer().getAll());
+        mAdapter = new CustomerAdapter(this, Customer.getAll());
         lvCustomer.setAdapter(mAdapter);
 
         fabAddCustomer = (FloatingActionButton) findViewById(R.id.fabAddCustomer);
@@ -68,14 +69,14 @@ public class CustomerListActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK) {
 
-            CustomerAdapter mAdapter = new CustomerAdapter(this, new Customer().getAll());
+            mAdapter.setCustomers(Customer.getAll());
             lvCustomer.setAdapter(mAdapter);
 
             Snackbar.make(customerLayout, "Cập nhật thành công...", Snackbar.LENGTH_LONG).show();
         }
         if (resultCode == -2) {
 
-            CustomerAdapter mAdapter = new CustomerAdapter(this, new Customer().getAll());
+            mAdapter.setCustomers(Customer.getAll());
             lvCustomer.setAdapter(mAdapter);
 
             Snackbar.make(customerLayout, "Đã xóa khách hàng...", Snackbar.LENGTH_LONG).show();
@@ -130,7 +131,7 @@ public class CustomerListActivity extends AppCompatActivity {
                                         }
                                     }
 
-                                    mAdapter = new CustomerAdapter(mContext, new Customer().getAll());
+                                    mAdapter.setCustomers(Customer.getAll());
                                     lvCustomer.setAdapter(mAdapter);
 
                                     Snackbar.make(customerLayout, "Đã xóa " + actionMode.getTitle() + "...", Snackbar.LENGTH_LONG).show();
@@ -150,7 +151,8 @@ public class CustomerListActivity extends AppCompatActivity {
 
                         mAdapter.getItem(i).setChecked(true);
                     }
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter.setCustomers(Customer.getAll());
+                    lvCustomer.setAdapter(mAdapter);
                     return true;
             }
             return false;
@@ -171,7 +173,8 @@ public class CustomerListActivity extends AppCompatActivity {
 
                 mAdapter.getItem(i).setChecked(false);
             }
-            mAdapter.notifyDataSetChanged();
+            mAdapter.setCustomers(Customer.getAll());
+            lvCustomer.setAdapter(mAdapter);
         }
 
     };

@@ -114,7 +114,7 @@ public class CustomerGroup extends Model {
         this.lastUpdatedDateTime = lastUpdatedDateTime;
     }
 
-    public List<CustomerGroup> getAll() {
+    public static List<CustomerGroup> getAll() {
 
         return new Select()
                 .from(CustomerGroup.class)
