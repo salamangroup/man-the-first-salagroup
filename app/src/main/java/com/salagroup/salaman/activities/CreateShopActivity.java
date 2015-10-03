@@ -211,11 +211,15 @@ public class CreateShopActivity extends AppCompatActivity
             ok = false;
             edtSoDTGiaoDich.setError("Vui lòng nhập tên số điện thoại giao dịch.(tối thiểu 10 chữ số).");
             edtSoDTGiaoDich.requestFocus();
-        } else if (address.isEmpty()) {
+        } else if (address.isEmpty())
+
+        {
             ok = false;
             edtDiaChi.setError("Vui lòng nhập địa chỉ của cửa hàng!");
             edtDiaChi.requestFocus();
-        } else if (workingPeriod.isEmpty()) {
+        } else if (workingPeriod.isEmpty())
+
+        {
             ok = false;
             edtWorkingPeriod.setError("Vui lòng nhập thời gian làm việc cửa hàng!");
             edtWorkingPeriod.requestFocus();
