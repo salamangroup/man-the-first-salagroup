@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.salagroup.salaman">
+    package="com.salagroup.salaman" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,15 +10,13 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme" >
         <meta-data
             android:name="AA_DB_NAME"
             android:value="saladb_2015_10_04" />
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="2" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -26,42 +24,35 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name" />
-
         <activity
             android:name=".activities.MainScreenActivity"
             android:label="@string/title_activity_main_screen" />
-
-        <activity android:name=".activities.CustomerListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".activities.CustomerGroupListActivity" >
         </activity>
-
-        <activity android:name=".activities.CustomerGroupListActivity">
-
-        </activity>
-
         <activity
             android:name=".activities.CustomerDetailsActivity"
             android:label="@string/app_name" />
-
         <activity
             android:name=".activities.LoginActivity"
-            android:theme="@style/LoginTheme">
-
+            android:theme="@style/LoginTheme" >
         </activity>
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
             android:name=".activities.CreateShopActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activities.FragmentTestActivity"
+            android:label="@string/title_activity_fragment_test" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

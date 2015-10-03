@@ -118,6 +118,14 @@ public class CustomerGroup extends Model {
 
         return new Select()
                 .from(CustomerGroup.class)
+                .orderBy("CustomerGroupName ASC")
+                .execute();
+    }
+
+    public static List<CustomerGroup> getAllActive() {
+
+        return new Select()
+                .from(CustomerGroup.class)
                 .where("Status = ?", 1)
                 .orderBy("CustomerGroupName ASC")
                 .execute();

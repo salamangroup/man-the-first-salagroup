@@ -2,7 +2,6 @@ package com.salagroup.salaman.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -12,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.salagroup.salaman.R;
-import com.salagroup.salaman.activities.CustomerListActivity;
+import com.salagroup.salaman.fragments.CustomerListFragment;
 import com.salagroup.salaman.pojo.Customer;
 import com.salagroup.salaman.pojo.Region;
 
@@ -27,7 +26,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
 
     private Context context;
     public List<Customer> customers;
-    private CustomerListActivity mCustomerListActivity;
+    private CustomerListFragment mCustomerListFragment;
 
     public void setModel(List<Customer> customers) {
         this.customers = customers;
@@ -44,11 +43,11 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         CheckBox chkSelect;
     }
 
-    public CustomerAdapter(Context context, List<Customer> customers) {
+    public CustomerAdapter(Context context, List<Customer> customers, CustomerListFragment mCustomerListFragment) {
         super(context, LAYOUT_RESOURCE, customers);
         this.context = context;
         this.customers = customers;
-        this.mCustomerListActivity = (CustomerListActivity) context;
+        this.mCustomerListFragment = mCustomerListFragment;
     }
 
     @Override
@@ -108,22 +107,22 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
 
                 if (chkCount == 0) {
 
-                    if (mCustomerListActivity.actionMode != null) {
+                    if (mCustomerListFragment.actionMode != null) {
 
-                        mCustomerListActivity.actionMode.finish();
-                        mCustomerListActivity.actionMode = null;
+                        mCustomerListFragment.actionMode.finish();
+                        mCustomerListFragment.actionMode = null;
 
                     }
                 } else {
 
-                    if (mCustomerListActivity.actionMode == null) {
+                    if (mCustomerListFragment.actionMode == null) {
 
-                        mCustomerListActivity.actionMode = mCustomerListActivity.startSupportActionMode(mCustomerListActivity.callback);
-                        mCustomerListActivity.actionMode.setTitle(chkCount + " khách hàng");
+                        mCustomerListFragment.startActionMode();
+                        mCustomerListFragment.actionMode.setTitle(chkCount + " khách hàng");
 
                     } else {
 
-                        mCustomerListActivity.actionMode.setTitle(chkCount + " khách hàng");
+                        mCustomerListFragment.actionMode.setTitle(chkCount + " khách hàng");
                     }
                 }
             }
@@ -134,8 +133,8 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
             @Override
             public void onClick(View v) {
 
-                if (mCustomerListActivity.actionMode == null) {
-                    mCustomerListActivity.startCustomerDetailsActivity(customers.get(position).getId());
+                if (mCustomerListFragment.actionMode == null) {
+                    mCustomerListFragment.startCustomerDetailsActivity(customers.get(position).getId());
                 } else {
                     viewHolder.chkSelect.setChecked(!viewHolder.chkSelect.isChecked());
                 }

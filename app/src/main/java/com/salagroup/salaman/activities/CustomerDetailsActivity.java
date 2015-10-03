@@ -70,7 +70,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
         spnProvince_City.setOnItemSelectedListener(this);
         spnDistrict.setOnItemSelectedListener(this);
 
-        cgSpinnerAdapter = new CustomerGroupSpinnerAdapter(mContext, new CustomerGroup().getAll());
+        cgSpinnerAdapter = new CustomerGroupSpinnerAdapter(mContext, new CustomerGroup().getAllActive());
         spnCustomerGroup.setAdapter(cgSpinnerAdapter);
 
         if (_id == -1) {
@@ -239,7 +239,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
                                 c.setStatus(false);
                                 c.save();
 
-                                setResult(-2);
+//                                setResult(-2);
                                 finish();
                             }
                         })
@@ -304,7 +304,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
 
                 c.save();
 
-                setResult(RESULT_OK);
+//                setResult(RESULT_OK);
                 finish();
 
                 break;

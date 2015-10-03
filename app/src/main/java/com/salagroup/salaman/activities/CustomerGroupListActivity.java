@@ -23,8 +23,6 @@ import com.salagroup.salaman.R;
 import com.salagroup.salaman.adapter.CustomerGroupAdapter;
 import com.salagroup.salaman.pojo.CustomerGroup;
 
-import java.util.List;
-
 /**
  * Created by TrytoThuan on 14/09/2015.
  */
@@ -50,7 +48,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
         FloatingActionButton fabAddCustomerGroup = (FloatingActionButton) findViewById(R.id.fabAddCustomerGroup);
 
 //        mAdapter = new CustomerGroupAdapter(mContext, (ArrayList<CustomerGroup>)customerGroups);
-        mAdapter = new CustomerGroupAdapter(mContext, CustomerGroup.getAll());
+        mAdapter = new CustomerGroupAdapter(mContext, CustomerGroup.getAllActive());
         lvCustomerGroup.setAdapter(mAdapter);
 
         fabAddCustomerGroup.setOnClickListener(this);
@@ -106,7 +104,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                                                 cg.setCustomerGroupName(edtCustomerGroup.getText().toString());
                                                 cg.save();
 
-                                                mAdapter.setModel(CustomerGroup.getAll());
+                                                mAdapter.setModel(CustomerGroup.getAllActive());
                                                 mAdapter.notifyDataSetChanged();
 
                                                 Snackbar.make(customerGroupLayout, "Cập nhật thành công",
@@ -127,7 +125,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                                                 cg.setStatus(false);
                                                 cg.save();
 
-                                                mAdapter.setModel(CustomerGroup.getAll());
+                                                mAdapter.setModel(CustomerGroup.getAllActive());
                                                 mAdapter.notifyDataSetChanged();
 
                                                 Snackbar.make(customerGroupLayout, "Đã xóa nhóm khách hàng",
@@ -177,7 +175,7 @@ public class CustomerGroupListActivity extends AppCompatActivity implements View
                                 cg.setStatus(true);
                                 cg.save();
 
-                                mAdapter.setModel(CustomerGroup.getAll());
+                                mAdapter.setModel(CustomerGroup.getAllActive());
                                 mAdapter.notifyDataSetChanged();
 
                                 Snackbar.make(customerGroupLayout, getString(R.string.notification_add_customer_group_ok),
