@@ -27,6 +27,7 @@ public class ShopWorkingPeriod extends Model {
 
     public ShopWorkingPeriod() {
         super();
+        this.status = true;
     }
 
     public long getShopID() {

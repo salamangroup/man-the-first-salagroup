@@ -29,6 +29,7 @@ public class ShopRate extends Model {
 
     public ShopRate() {
         super();
+        this.status = true;
     }
 
 

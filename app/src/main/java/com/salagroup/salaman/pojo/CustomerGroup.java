@@ -32,6 +32,7 @@ public class CustomerGroup extends Model {
 
     public CustomerGroup() {
         super();
+        this.status = true;
     }
 
     public String getCode() {
@@ -123,7 +124,7 @@ public class CustomerGroup extends Model {
                 .execute();
     }
 
-    public static int getCustomerCountById(long id){
+    public static int getCustomerCountById(long id) {
 
         return new Select()
                 .from(Customer.class)

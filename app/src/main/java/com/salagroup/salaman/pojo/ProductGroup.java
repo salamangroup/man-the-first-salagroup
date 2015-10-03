@@ -31,6 +31,7 @@ public class ProductGroup extends Model {
 
     public ProductGroup() {
         super();
+        this.status = true;
     }
 
     public String getCode() {

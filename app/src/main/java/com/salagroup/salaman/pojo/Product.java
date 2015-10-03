@@ -40,6 +40,7 @@ public class Product extends Model {
 
     public Product() {
         super();
+        this.status = true;
     }
 
     public String getCode() {

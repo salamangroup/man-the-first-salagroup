@@ -33,6 +33,7 @@ public class TopicQA extends Model {
 
     public TopicQA() {
         super();
+        this.status = true;
     }
 
     public String getCode() {

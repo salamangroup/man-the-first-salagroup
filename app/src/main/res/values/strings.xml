@@ -23,6 +23,7 @@
     <string name="store_info_item_mummy_baby"><![CDATA[Mẹ & Bé]]></string>
     <string name="store_info_item_other_types"><u>Ngành khác</u></string>
     <string name="store_info_item_update">Cập nhật</string>
+    <string name="store_info_create">Tạo shop</string>
 
     <string name="title_activity_main_screen">MainScreen</string>
     <string name="main_screen_item_account_info">Thông tin tài khoản</string>

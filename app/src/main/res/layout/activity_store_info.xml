@@ -139,7 +139,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@drawable/lightblue_button_background"
-            android:text="@string/store_info_item_update"
+            android:text="@string/store_info_create"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
     </LinearLayout>
