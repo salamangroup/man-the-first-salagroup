@@ -25,6 +25,7 @@ public class FavouriteQA extends Model {
 
     public FavouriteQA() {
         super();
+        this.status = true;
     }
 
     public long getUserID() {

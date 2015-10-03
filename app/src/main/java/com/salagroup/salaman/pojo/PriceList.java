@@ -37,6 +37,7 @@ public class PriceList extends Model {
 
     public PriceList() {
         super();
+        this.status = true;
     }
 
     public String getCode() {

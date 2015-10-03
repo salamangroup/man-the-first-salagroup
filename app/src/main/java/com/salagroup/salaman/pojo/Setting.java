@@ -37,6 +37,7 @@ public class Setting extends Model {
 
     public Setting() {
         super();
+        this.status = true;
     }
 
     public String getCmCode() {

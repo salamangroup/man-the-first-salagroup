@@ -71,6 +71,7 @@ public class Shop extends Model {
 
     public Shop() {
         super();
+        this.status = true;
     }
 
     public String getCode() {

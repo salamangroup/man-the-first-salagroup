@@ -164,12 +164,10 @@ public class Region extends Model implements Serializable {
     }
 
     public static String getRegionNameById(long id) {
-
         Region region = new Select()
                 .from(Region.class)
                 .where("_id = ?", id)
                 .executeSingle();
-
         return region.getRegionName().trim();
     }
 }
