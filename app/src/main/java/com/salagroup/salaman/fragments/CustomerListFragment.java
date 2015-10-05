@@ -28,9 +28,6 @@ import com.salagroup.salaman.pojo.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by TrytoThuan on 14/09/2015.
- */
 public class CustomerListFragment extends Fragment implements ActionMode.Callback {
 
     private FloatingActionButton fabAddCustomer;
@@ -51,6 +48,8 @@ public class CustomerListFragment extends Fragment implements ActionMode.Callbac
 
         mAdapter.setModel(Customer.getAllActive());
         mAdapter.notifyDataSetChanged();
+
+
     }
 
     @Override

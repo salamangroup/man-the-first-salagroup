@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.salagroup.salaman.R;
+import com.salagroup.salaman.fragments.CustomerGroupListFragment;
 import com.salagroup.salaman.fragments.CustomerListFragment;
 
 public class FragmentTestActivity extends AppCompatActivity {
@@ -16,7 +17,7 @@ public class FragmentTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_test);
 
-        Fragment listFragment = new CustomerListFragment();
+        Fragment listFragment = new CustomerGroupListFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

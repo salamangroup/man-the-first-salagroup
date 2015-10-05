@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,16 +31,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.StringTokenizer;
 
-/**
- * Created by TrytoThuan on 14/09/2015.
- */
 public class CustomerDetailsFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private LinearLayout customerInfoLayout;
     private TextView tvTitleCustomerInfo;
     private EditText edtCustomerName, edtCustomerPhone, edtAddress;
-    private CustomSpinner spnProvince_City;
-    private CustomSpinner spnDistrict;
+    private CustomSpinner spnProvincials;
+    private CustomSpinner spnDistricts;
     private Spinner spnCustomerGroup;
     private DatePicker dpkBirthday;
     private RadioGroup rdgGenderType;
@@ -61,8 +59,8 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
         edtCustomerPhone = (EditText) view.findViewById(R.id.edtCustomerPhone);
         edtAddress = (EditText) view.findViewById(R.id.edtAddress);
 
-        spnProvince_City = (CustomSpinner) view.findViewById(R.id.spnProvince_City);
-        spnDistrict = (CustomSpinner) view.findViewById(R.id.spnDistrict);
+        spnProvincials = (CustomSpinner) view.findViewById(R.id.spnProvincials);
+        spnDistricts = (CustomSpinner) view.findViewById(R.id.spnDistricts);
         spnCustomerGroup = (Spinner) view.findViewById(R.id.spnCustomerGroup);
 
         dpkBirthday = (DatePicker) view.findViewById(R.id.dpkBirthday);
@@ -92,10 +90,14 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
 
         initTinhThanh();
 //        initQuanHuyen(0);
-        spnProvince_City.setOnItemSelectedListener(this);
-        spnDistrict.setOnItemSelectedListener(this);
+        spnProvincials.setOnItemSelectedListener(this);
+        spnDistricts.setOnItemSelectedListener(this);
 
-        cgSpinnerAdapter = new CustomerGroupSpinnerAdapter(mContext, CustomerGroup.getAllActive());
+        List<CustomerGroup> customerGroups = CustomerGroup.getAllActive();
+        CustomerGroup cg = new CustomerGroup();
+        cg.setCustomerGroupName("- không nhóm -");
+        customerGroups.add(0, cg);
+        cgSpinnerAdapter = new CustomerGroupSpinnerAdapter(mContext, customerGroups);
         spnCustomerGroup.setAdapter(cgSpinnerAdapter);
 
         if (_id == -1) {
@@ -115,16 +117,16 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
 
                 if (provincialsAdapter.regions.get(i).getId() == c.getRegionL4()) {
 
-                    spnProvince_City.setSelection(i);
+                    spnProvincials.setSelection(i);
                     initQuanHuyen(provincialsAdapter.regions.get(i).getId());
                     break;
                 }
             }
-//            for (int i = 0; i < districtsAdapter.getCount(); i++) {
+//            for (int i = 0; i < districtsAdapter.regions.size(); i++) {
 //
-//                if (districtsAdapter.getItem(i).getId() == c.getRegionL5()) {
+//                if (districtsAdapter.regions.get(i).getId() == c.getRegionL5()) {
 //
-//                    spnDistrict.setSelection(i);
+//                    spnDistricts.setSelection(i);
 //                    break;
 //                }
 //            }
@@ -148,7 +150,7 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
                     break;
             }
 
-            for (int i = 0; i < cgSpinnerAdapter.getCount(); i++) {
+            for (int i = 1; i < cgSpinnerAdapter.getCount(); i++) {
 
                 if (cgSpinnerAdapter.getItem(i).getId() == c.getCustomerGroupID()) {
 
@@ -164,7 +166,7 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
 
         switch (parent.getId()) {
 
-            case R.id.spnProvince_City:
+            case R.id.spnProvincials:
 
                 try {
                     long parentId = provincialsAdapter.getItem(position).getId();
@@ -174,16 +176,12 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
                 }
 
                 break;
-            case R.id.spnDistrict:
+            case R.id.spnDistricts:
 
-//                try {
-//                    long parentId = provincialsAdapter.getItem(spnProvince_City.getSelectedItemPosition()).getId();
-//                    if (parentId == 0) {
-//                        initQuanHuyen(0);
-//                    }
-//                }catch (NullPointerException ex){
-//                    initQuanHuyen(0);
-//                }
+                Region r = (Region) spnDistricts.getSelectedItem();
+                if(r.getRegionName().length()==0){
+                    spnDistricts.setSelection(1);
+                }
 
                 break;
         }
@@ -202,20 +200,20 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
         r.setRegionName("Tỉnh / Thành");
         provincialsAdapter.add(r);
 
-        spnProvince_City.setAdapter(provincialsAdapter);
-        spnProvince_City.setSelection(provincialsAdapter.getCount());
+        spnProvincials.setAdapter(provincialsAdapter);
+        spnProvincials.setSelection(provincialsAdapter.getCount());
     }
 
-    private void initQuanHuyen(long tinhthanhID) {
+    private void initQuanHuyen(long parentId) {
 
 
-        if (tinhthanhID != 0) {
-            List<Region> districts = Region.getRegionByParentId(tinhthanhID);
+        if (parentId != 0) {
+            List<Region> districts = Region.getRegionByParentId(parentId);
             districtsAdapter = new MyRegionAdapter(mContext, districts);
             Region r = new Region();
             r.setRegionName("Quận / Huyện");
             districtsAdapter.add(r);
-            spnDistrict.setAdapter(districtsAdapter);
+            spnDistricts.setAdapter(districtsAdapter);
 
             if (_id != -1) {
 
@@ -224,7 +222,7 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
 
                     if (districtsAdapter.regions.get(i).getId() == c.getRegionL5()) {
 
-                        spnDistrict.setSelection(i);
+                        spnDistricts.setSelection(i);
                         break;
                     }
                 }
@@ -238,8 +236,8 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
             Region r2 = new Region();
             r2.setRegionName("Quận / Huyện");
             districtsAdapter.add(r2);
-            spnDistrict.setAdapter(districtsAdapter);
-            spnDistrict.setSelection(districtsAdapter.getCount());
+            spnDistricts.setAdapter(districtsAdapter);
+            spnDistricts.setSelection(districtsAdapter.getCount());
         }
     }
 
@@ -284,9 +282,9 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
 
                 c.setPhone(edtCustomerPhone.getText().toString());
 
-                long regionL4Id = provincialsAdapter.getItem(spnProvince_City.getSelectedItemPosition()).getId();
+                long regionL4Id = provincialsAdapter.getItem(spnProvincials.getSelectedItemPosition()).getId();
                 c.setRegionL4(regionL4Id);
-                long regionL5Id = districtsAdapter.getItem(spnDistrict.getSelectedItemPosition()).getId();
+                long regionL5Id = districtsAdapter.getItem(spnDistricts.getSelectedItemPosition()).getId();
                 c.setRegionL5(regionL5Id);
                 String diachi = edtAddress.getText().toString();
                 c.setAddress(diachi);
@@ -312,7 +310,12 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
                 }
 
                 int groupPos = spnCustomerGroup.getSelectedItemPosition();
-                long groupId = cgSpinnerAdapter.getItem(groupPos).getId();
+                long groupId;
+                try{
+                    groupId = cgSpinnerAdapter.getItem(groupPos).getId();
+                }catch (Exception ex){
+                    groupId = 0;
+                }
                 c.setCustomerGroupID(groupId);
 
                 Calendar calendar = Calendar.getInstance();

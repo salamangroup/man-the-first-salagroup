@@ -56,13 +56,13 @@
                 android:textColor="#33b5e5" />
 
             <com.salagroup.salaman.customview.CustomSpinner
-                android:id="@+id/spnProvince_City"
+                android:id="@+id/spnProvincials"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="@dimen/activity_horizontal_margin" />
 
             <com.salagroup.salaman.customview.CustomSpinner
-                android:id="@+id/spnDistrict"
+                android:id="@+id/spnDistricts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="@dimen/activity_horizontal_margin" />
