@@ -9,6 +9,7 @@ import java.util.List;
 
 @Table(name = "T02_CustomerGroup", id = "_id")
 public class CustomerGroup extends Model {
+
     @Column(name = "Code")
     private String code;
     @Column(name = "ShopID")
@@ -115,6 +116,14 @@ public class CustomerGroup extends Model {
     }
 
     public static List<CustomerGroup> getAll() {
+
+        return new Select()
+                .from(CustomerGroup.class)
+                .orderBy("CustomerGroupName ASC")
+                .execute();
+    }
+
+    public static List<CustomerGroup> getAllActive() {
 
         return new Select()
                 .from(CustomerGroup.class)

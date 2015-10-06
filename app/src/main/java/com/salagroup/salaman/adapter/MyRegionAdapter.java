@@ -16,7 +16,7 @@ public class MyRegionAdapter extends ArrayAdapter<Region> {
     private static final int TEXTVIEW_ID = android.R.id.text1;
 
     private Context context;
-    private List<Region> regions;
+    public List<Region> regions;
 
     class ViewHolder {
         TextView tvRegionName;

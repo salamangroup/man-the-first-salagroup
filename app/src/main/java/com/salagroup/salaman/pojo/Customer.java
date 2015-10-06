@@ -271,6 +271,13 @@ public class Customer extends Model {
                 .execute();
     }
 
+    public static List<Customer> getCustomersByGroupId(long groupId) {
+        return new Select()
+                .from(Customer.class)
+                .where("CustomerGroupID = ?", groupId)
+                .execute();
+    }
+
     public static Customer getCustomerById(long _id) {
 
         return new Select()
@@ -279,7 +286,7 @@ public class Customer extends Model {
                 .executeSingle();
     }
 
-    public static int getInvoiceCountById(long id){
+    public static int getInvoiceCountById(long id) {
 
         return new Select()
                 .from(SaleInvoice.class)

@@ -1,12 +1,15 @@
-package com.salagroup.salaman.activities;
+package com.salagroup.salaman.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,16 +31,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.StringTokenizer;
 
-/**
- * Created by TrytoThuan on 14/09/2015.
- */
-public class CustomerDetailsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class CustomerDetailsFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private LinearLayout customerInfoLayout;
     private TextView tvTitleCustomerInfo;
     private EditText edtCustomerName, edtCustomerPhone, edtAddress;
-    private CustomSpinner spnProvince_City;
-    private CustomSpinner spnDistrict;
+    private CustomSpinner spnProvincials;
+    private CustomSpinner spnDistricts;
     private Spinner spnCustomerGroup;
     private DatePicker dpkBirthday;
     private RadioGroup rdgGenderType;
@@ -50,15 +50,38 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
     private long _id;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_customer_detail);
-        mContext = this;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        _id = getIntent().getLongExtra("id", -1);
-        initFindView(); // FindViewById()
+        View view = inflater.inflate(R.layout.fragment_customer_detail, container, false);
 
-        tvTitleCustomerInfo = (TextView) findViewById(R.id.tvTitleCustomerInfo);
+        edtCustomerName = (EditText) view.findViewById(R.id.edtCustomerName);
+        edtCustomerPhone = (EditText) view.findViewById(R.id.edtCustomerPhone);
+        edtAddress = (EditText) view.findViewById(R.id.edtAddress);
+
+        spnProvincials = (CustomSpinner) view.findViewById(R.id.spnProvincials);
+        spnDistricts = (CustomSpinner) view.findViewById(R.id.spnDistricts);
+        spnCustomerGroup = (Spinner) view.findViewById(R.id.spnCustomerGroup);
+
+        dpkBirthday = (DatePicker) view.findViewById(R.id.dpkBirthday);
+
+        rdgGenderType = (RadioGroup) view.findViewById(R.id.rdgGenderType);
+
+        btnCusDetailCancel = (Button) view.findViewById(R.id.btnCusDetailCancel);
+        btnCusDetailDelete = (Button) view.findViewById(R.id.btnCusDetailDelete);
+        btnCusDetailUpdate = (Button) view.findViewById(R.id.btnCusDetailUpdate);
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mContext = this.getActivity();
+
+        _id = getArguments().getLong("id");
+
+        tvTitleCustomerInfo = (TextView) getActivity().findViewById(R.id.tvTitleCustomerInfo);
         setFontforTitle(tvTitleCustomerInfo);
 
         btnCusDetailCancel.setOnClickListener(this);
@@ -67,10 +90,14 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
 
         initTinhThanh();
 //        initQuanHuyen(0);
-        spnProvince_City.setOnItemSelectedListener(this);
-        spnDistrict.setOnItemSelectedListener(this);
+        spnProvincials.setOnItemSelectedListener(this);
+        spnDistricts.setOnItemSelectedListener(this);
 
-        cgSpinnerAdapter = new CustomerGroupSpinnerAdapter(mContext, new CustomerGroup().getAll());
+        List<CustomerGroup> customerGroups = CustomerGroup.getAllActive();
+        CustomerGroup cg = new CustomerGroup();
+        cg.setCustomerGroupName("- không nhóm -");
+        customerGroups.add(0, cg);
+        cgSpinnerAdapter = new CustomerGroupSpinnerAdapter(mContext, customerGroups);
         spnCustomerGroup.setAdapter(cgSpinnerAdapter);
 
         if (_id == -1) {
@@ -86,23 +113,23 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
 
             edtCustomerPhone.setText(c.getPhone());
 
-            for (int i = 0; i < provincialsAdapter.getCount(); i++) {
+            for (int i = 0; i < provincialsAdapter.regions.size(); i++) {
 
-                if (provincialsAdapter.getItem(i).getId() == c.getRegionL4()) {
+                if (provincialsAdapter.regions.get(i).getId() == c.getRegionL4()) {
 
-                    spnProvince_City.setSelection(i);
-                    initQuanHuyen(provincialsAdapter.getItem(i).getId());
+                    spnProvincials.setSelection(i);
+                    initQuanHuyen(provincialsAdapter.regions.get(i).getId());
                     break;
                 }
             }
-            for (int i = 0; i < districtsAdapter.getCount(); i++) {
-
-                if (districtsAdapter.getItem(i).getId() == c.getRegionL5()) {
-
-                    spnDistrict.setSelection(i);
-                    break;
-                }
-            }
+//            for (int i = 0; i < districtsAdapter.regions.size(); i++) {
+//
+//                if (districtsAdapter.regions.get(i).getId() == c.getRegionL5()) {
+//
+//                    spnDistricts.setSelection(i);
+//                    break;
+//                }
+//            }
             edtAddress.setText(c.getAddress());
 
             StringTokenizer tokenizer = new StringTokenizer(c.getBirthday(), "-");
@@ -123,7 +150,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
                     break;
             }
 
-            for (int i = 0; i < cgSpinnerAdapter.getCount(); i++) {
+            for (int i = 1; i < cgSpinnerAdapter.getCount(); i++) {
 
                 if (cgSpinnerAdapter.getItem(i).getId() == c.getCustomerGroupID()) {
 
@@ -139,7 +166,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
 
         switch (parent.getId()) {
 
-            case R.id.spnProvince_City:
+            case R.id.spnProvincials:
 
                 try {
                     long parentId = provincialsAdapter.getItem(position).getId();
@@ -149,16 +176,12 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
                 }
 
                 break;
-            case R.id.spnDistrict:
+            case R.id.spnDistricts:
 
-//                try {
-//                    long parentId = provincialsAdapter.getItem(spnProvince_City.getSelectedItemPosition()).getId();
-//                    if (parentId == 0) {
-//                        initQuanHuyen(0);
-//                    }
-//                }catch (NullPointerException ex){
-//                    initQuanHuyen(0);
-//                }
+                Region r = (Region) spnDistricts.getSelectedItem();
+                if(r.getRegionName().length()==0){
+                    spnDistricts.setSelection(1);
+                }
 
                 break;
         }
@@ -177,29 +200,29 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
         r.setRegionName("Tỉnh / Thành");
         provincialsAdapter.add(r);
 
-        spnProvince_City.setAdapter(provincialsAdapter);
-        spnProvince_City.setSelection(provincialsAdapter.getCount());
+        spnProvincials.setAdapter(provincialsAdapter);
+        spnProvincials.setSelection(provincialsAdapter.getCount());
     }
 
-    private void initQuanHuyen(long tinhthanhID) {
+    private void initQuanHuyen(long parentId) {
 
 
-        if (tinhthanhID != 0) {
-            List<Region> districts = Region.getRegionByParentId(tinhthanhID);
+        if (parentId != 0) {
+            List<Region> districts = Region.getRegionByParentId(parentId);
             districtsAdapter = new MyRegionAdapter(mContext, districts);
             Region r = new Region();
             r.setRegionName("Quận / Huyện");
             districtsAdapter.add(r);
-            spnDistrict.setAdapter(districtsAdapter);
+            spnDistricts.setAdapter(districtsAdapter);
 
             if (_id != -1) {
 
                 Customer c = Customer.getCustomerById(_id);
-                for (int i = 0; i < districtsAdapter.getCount(); i++) {
+                for (int i = 0; i < districtsAdapter.regions.size(); i++) {
 
-                    if (districtsAdapter.getItem(i).getId() == c.getRegionL5()) {
+                    if (districtsAdapter.regions.get(i).getId() == c.getRegionL5()) {
 
-                        spnDistrict.setSelection(i);
+                        spnDistricts.setSelection(i);
                         break;
                     }
                 }
@@ -213,8 +236,8 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
             Region r2 = new Region();
             r2.setRegionName("Quận / Huyện");
             districtsAdapter.add(r2);
-            spnDistrict.setAdapter(districtsAdapter);
-            spnDistrict.setSelection(districtsAdapter.getCount());
+            spnDistricts.setAdapter(districtsAdapter);
+            spnDistricts.setSelection(districtsAdapter.getCount());
         }
     }
 
@@ -224,7 +247,7 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
         switch (v.getId()) {
             case R.id.btnCusDetailCancel:
 
-                finish();
+                getActivity().onBackPressed();
 
                 break;
             case R.id.btnCusDetailDelete:
@@ -239,8 +262,8 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
                                 c.setStatus(false);
                                 c.save();
 
-                                setResult(-2);
-                                finish();
+//                                setResult(-2);
+                                getActivity().onBackPressed();
                             }
                         })
                         .setNegativeButton("Không", null)
@@ -255,13 +278,13 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
                     c = Customer.getCustomerById(_id);
                 }
 
-                c.setCustomerName(edtCustomerName.getText().toString());
+                c.setCustomerName(String.valueOf(edtCustomerName.getText()));
 
                 c.setPhone(edtCustomerPhone.getText().toString());
 
-                long regionL4Id = provincialsAdapter.getItem(spnProvince_City.getSelectedItemPosition()).getId();
+                long regionL4Id = provincialsAdapter.getItem(spnProvincials.getSelectedItemPosition()).getId();
                 c.setRegionL4(regionL4Id);
-                long regionL5Id = districtsAdapter.getItem(spnDistrict.getSelectedItemPosition()).getId();
+                long regionL5Id = districtsAdapter.getItem(spnDistricts.getSelectedItemPosition()).getId();
                 c.setRegionL5(regionL5Id);
                 String diachi = edtAddress.getText().toString();
                 c.setAddress(diachi);
@@ -287,7 +310,12 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
                 }
 
                 int groupPos = spnCustomerGroup.getSelectedItemPosition();
-                long groupId = cgSpinnerAdapter.getItem(groupPos).getId();
+                long groupId;
+                try{
+                    groupId = cgSpinnerAdapter.getItem(groupPos).getId();
+                }catch (Exception ex){
+                    groupId = 0;
+                }
                 c.setCustomerGroupID(groupId);
 
                 Calendar calendar = Calendar.getInstance();
@@ -304,34 +332,15 @@ public class CustomerDetailsActivity extends AppCompatActivity implements View.O
 
                 c.save();
 
-                setResult(RESULT_OK);
-                finish();
+//                setResult(RESULT_OK);
+                getActivity().onBackPressed();
 
                 break;
         }
     }
 
-    private void initFindView() {
-
-        edtCustomerName = (EditText) findViewById(R.id.edtCustomerName);
-        edtCustomerPhone = (EditText) findViewById(R.id.edtCustomerPhone);
-        edtAddress = (EditText) findViewById(R.id.edtAddress);
-
-        spnProvince_City = (CustomSpinner) findViewById(R.id.spnProvince_City);
-        spnDistrict = (CustomSpinner) findViewById(R.id.spnDistrict);
-        spnCustomerGroup = (Spinner) findViewById(R.id.spnCustomerGroup);
-
-        dpkBirthday = (DatePicker) findViewById(R.id.dpkBirthday);
-
-        rdgGenderType = (RadioGroup) findViewById(R.id.rdgGenderType);
-
-        btnCusDetailCancel = (Button) findViewById(R.id.btnCusDetailCancel);
-        btnCusDetailDelete = (Button) findViewById(R.id.btnCusDetailDelete);
-        btnCusDetailUpdate = (Button) findViewById(R.id.btnCusDetailUpdate);
-    }
-
     public void setFontforTitle(TextView tvTitleCustomer) {
-        Typeface robotoFont = Typeface.createFromAsset(this.getAssets(), "fonts/Roboto-Light.ttf");
+        Typeface robotoFont = Typeface.createFromAsset(this.getActivity().getAssets(), "fonts/Roboto-Light.ttf");
         tvTitleCustomer.setTypeface(robotoFont);
     }
 }
