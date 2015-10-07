@@ -39,9 +39,9 @@ public class SystemInfoHelper {
      */
     public static String getCurrentDate_VietnamFormat() {
 
-        SimpleDateFormat dateFormatGmt = new SimpleDateFormat(Constant.DATE_FORMAT_VIETNAM);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constant.DATE_FORMAT_VIETNAM);
 
-        return dateFormatGmt.format(new Date());
+        return dateFormat.format(new Date());
     }
 
     /**
@@ -51,16 +51,16 @@ public class SystemInfoHelper {
      */
     public static String getCurrenTime(boolean format24h) {
 
-        SimpleDateFormat dateFormatGmt;
+        SimpleDateFormat dateFormat;
 
         if (format24h) {
 
-            dateFormatGmt = new SimpleDateFormat(Constant.TIME_FORMAT_24H);
+            dateFormat = new SimpleDateFormat(Constant.TIME_FORMAT_24H);
 
         } else {
-            dateFormatGmt = new SimpleDateFormat(Constant.TIME_FORMAT_AMPM);
+            dateFormat = new SimpleDateFormat(Constant.TIME_FORMAT_AMPM);
         }
 
-        return dateFormatGmt.format(new Date());
+        return dateFormat.format(new Date());
     }
 }

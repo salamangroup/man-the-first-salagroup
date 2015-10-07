@@ -2,6 +2,7 @@ package com.salagroup.salaman.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -35,21 +36,12 @@ public class CustomerListFragment extends Fragment implements ActionMode.Callbac
     private CustomerAdapter mAdapter;
     private Context mContext;
 
+    public static int FRAGMENT_RESULT = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_customer_list, container, false);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        mAdapter.setModel(Customer.getAllActive());
-        mAdapter.notifyDataSetChanged();
-
-
     }
 
     @Override
@@ -76,7 +68,26 @@ public class CustomerListFragment extends Fragment implements ActionMode.Callbac
         });
     }
 
-//    @Override
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (FRAGMENT_RESULT == 1) {
+
+            Snackbar.make(customerLayout, "Cập nhật thành công...", Snackbar.LENGTH_LONG).show();
+            FRAGMENT_RESULT = 0;
+        }else if(FRAGMENT_RESULT == -1){
+
+            Snackbar.make(customerLayout, "Đã xóa khách hàng...", Snackbar.LENGTH_LONG).show();
+            FRAGMENT_RESULT = 0;
+        }
+
+        mAdapter.setModel(Customer.getAllActive());
+        mAdapter.notifyDataSetChanged();
+    }
+
+    //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
 //
@@ -108,27 +119,18 @@ public class CustomerListFragment extends Fragment implements ActionMode.Callbac
 //        startActivity(intent);
 
         Fragment detailFragment = new CustomerDetailsFragment();
-
-
         Bundle mBundle = new Bundle();
         mBundle.putLong("id", id);
         detailFragment.setArguments(mBundle);
 
-        final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        //check if the device is landscape or portrait
-        Configuration configuration = getActivity().getResources().getConfiguration();
-        int ori = configuration.orientation;
-
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, detailFragment);
-
         fragmentTransaction.addToBackStack(null);
-
         fragmentTransaction.commit();
     }
 
-    //region Multidelete
+    //region --Multidelete--
     public ActionMode actionMode;
 
     public void startActionMode() {
