@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.salagroup.salaman.R;
 import com.salagroup.salaman.adapter.CustomerGroupAdapter;
+import com.salagroup.salaman.helper.ValidationHelper;
 import com.salagroup.salaman.pojo.Customer;
 import com.salagroup.salaman.pojo.CustomerGroup;
 
@@ -29,8 +31,10 @@ import java.util.List;
 
 public class CustomerGroupListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
+
     private LinearLayout customerGroupLayout;
     private EditText edtCustomerGroup;
+
     private Context mContext;
     private CustomerGroupAdapter mAdapter;
 
@@ -45,8 +49,7 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mContext = this.getActivity();
-
+        mContext = getActivity();
 
         TextView tvTitleCustomer = (TextView) getActivity().findViewById(R.id.tvTitleCustomerGroup);
         setFontforTitle(tvTitleCustomer);
@@ -126,6 +129,7 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
 
         edtCustomerGroup = (EditText) mDialog.findViewById(R.id.edtCustomerGroup);
         edtCustomerGroup.setSingleLine();
+        ValidationHelper.addValidSpacesTextChanged(edtCustomerGroup);
         //TODO xử lý tên nhóm nhập vào
 
         if (isUpdating) {
@@ -135,29 +139,58 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
             edtCustomerGroup.setSelection(cg.getCustomerGroupName().length());
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setView(mDialog)
-                .setNegativeButton(getString(R.string.btn_customer_group_cancel), new DialogInterface.OnClickListener() {
+        final AlertDialog mAlertDialog = new AlertDialog.Builder(mContext)
+                .setView(mDialog)
+                .setNegativeButton(getString(R.string.btn_customer_group_cancel), null)
+                .setPositiveButton(getString(R.string.btn_customer_group_save), null)
+                .create();
+        mAlertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+
+                Button mPositiveButton = mAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                mPositiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                    public void onClick(View v) {
+
+                        if (checkInput()) {
+
+                            String name = edtCustomerGroup.getText().toString();
+                            cg.setCustomerGroupName(name);
+                            cg.setStatus(true);
+                            cg.save();
+
+                            mAdapter.setModel(CustomerGroup.getAllActive());
+                            mAdapter.notifyDataSetChanged();
+
+                            Snackbar.make(customerGroupLayout, "Cập nhật thành công",
+                                    Snackbar.LENGTH_LONG).show();
+
+                            mAlertDialog.dismiss();
+                        }
                     }
-                })
-                .setPositiveButton(getString(R.string.btn_customer_group_save), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                });
+            }
+        });
+        mAlertDialog.show();
+    }
 
-                        cg.setCustomerGroupName(edtCustomerGroup.getText().toString());
-                        cg.setStatus(true);
-                        cg.save();
+    private boolean checkInput() {
 
-                        mAdapter.setModel(CustomerGroup.getAllActive());
-                        mAdapter.notifyDataSetChanged();
+        String name = edtCustomerGroup.getText().toString().trim();
+        name = ValidationHelper.getValidSpacesString(name);
+        if (name.length() == 0) {
 
-                        Snackbar.make(customerGroupLayout, "Cập nhật thành công",
-                                Snackbar.LENGTH_LONG).show();
-                    }
-                }).show();
+            edtCustomerGroup.setError("Vui lòng nhập tên nhóm!");
+            edtCustomerGroup.setText("");
+            edtCustomerGroup.setSelection(0);
+            return false;
+        } else {
+
+            edtCustomerGroup.setText(name);
+        }
+
+        return true;
     }
 
     private void showDialogDelete() {

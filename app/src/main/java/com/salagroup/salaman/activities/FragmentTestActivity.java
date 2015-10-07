@@ -17,7 +17,7 @@ public class FragmentTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_test);
 
-        Fragment listFragment = new CustomerGroupListFragment();
+        Fragment listFragment = new CustomerListFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
