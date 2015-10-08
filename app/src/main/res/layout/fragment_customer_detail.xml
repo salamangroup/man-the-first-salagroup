@@ -40,7 +40,7 @@
                 android:id="@+id/edtCustomerPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
+                android:inputType="numberDecimal"
                 android:maxLength="20"
                 android:hint="@string/customer_detail_phone" />
 

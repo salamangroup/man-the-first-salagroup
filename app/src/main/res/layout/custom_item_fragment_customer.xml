@@ -77,11 +77,34 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnDialCall"
+                android:src="@drawable/ic_dial_call"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSendMessage"
+                android:src="@drawable/ic_send_message"/>
+
+        </LinearLayout>
+
+
         <CheckBox
             android:id="@+id/chkSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone" />
+
+
 
     </LinearLayout>
 

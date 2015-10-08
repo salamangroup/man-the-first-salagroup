@@ -2,8 +2,6 @@ package com.salagroup.salaman.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +22,7 @@ import android.widget.TextView;
 
 import com.salagroup.salaman.R;
 import com.salagroup.salaman.adapter.CustomerAdapter;
+import com.salagroup.salaman.helper.Constant;
 import com.salagroup.salaman.pojo.Customer;
 
 import java.util.ArrayList;
@@ -73,12 +72,13 @@ public class CustomerListFragment extends Fragment implements ActionMode.Callbac
     public void onResume() {
         super.onResume();
 
-        if (FRAGMENT_RESULT == 1) {
-
+        if (FRAGMENT_RESULT == Constant.Statement.IS_INSERTING) {
+            Snackbar.make(customerLayout, "Thêm khách hàng thành công...", Snackbar.LENGTH_LONG).show();
+            FRAGMENT_RESULT = 0;
+        }else if(FRAGMENT_RESULT == Constant.Statement.IS_UPDATETING){
             Snackbar.make(customerLayout, "Cập nhật thành công...", Snackbar.LENGTH_LONG).show();
             FRAGMENT_RESULT = 0;
-        }else if(FRAGMENT_RESULT == -1){
-
+        } if(FRAGMENT_RESULT == Constant.Statement.IS_DELETING){
             Snackbar.make(customerLayout, "Đã xóa khách hàng...", Snackbar.LENGTH_LONG).show();
             FRAGMENT_RESULT = 0;
         }
@@ -159,7 +159,7 @@ public class CustomerListFragment extends Fragment implements ActionMode.Callbac
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                final ArrayList<Long> undoLists = new ArrayList<Long>();
+                                final ArrayList<Long> undoLists = new ArrayList<>();
 
                                 for (int i = mAdapter.customers.size() - 1; i >= 0; i--) {
 
