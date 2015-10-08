@@ -1,17 +1,21 @@
 package com.salagroup.salaman.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.salagroup.salaman.R;
 import com.salagroup.salaman.fragments.CustomerListFragment;
+import com.salagroup.salaman.helper.ValidationHelper;
 import com.salagroup.salaman.pojo.Customer;
 import com.salagroup.salaman.pojo.Region;
 
@@ -38,6 +42,8 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         TextView tvCountCustomer;
         TextView tvAddressCustomer;
         TextView tvPhoneCustomer;
+        ImageButton btnDialCall;
+        ImageButton btnSendMessage;
 
         LinearLayout layoutRoot;
         CheckBox chkSelect;
@@ -60,6 +66,9 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+
+        final Customer c = customers.get(position);
+
         final ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -68,6 +77,8 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
             viewHolder.tvCountCustomer = (TextView) convertView.findViewById(R.id.tvCountCustomer);
             viewHolder.tvAddressCustomer = (TextView) convertView.findViewById(R.id.tvAddressCustomer);
             viewHolder.tvPhoneCustomer = (TextView) convertView.findViewById(R.id.tvPhoneCustomer);
+            viewHolder.btnDialCall = (ImageButton) convertView.findViewById(R.id.btnDialCall);
+            viewHolder.btnSendMessage = (ImageButton) convertView.findViewById(R.id.btnSendMessage);
 
             viewHolder.layoutRoot = (LinearLayout) convertView.findViewById(R.id.layoutRoot);
             viewHolder.chkSelect = (CheckBox) convertView.findViewById(R.id.chkSelect);
@@ -77,13 +88,43 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tvNameCustomer.setText(customers.get(position).getCustomerName());
-        String diachi = customers.get(position).getAddress() + ", " + Region.getRegionNameById(customers.get(position).getRegionL5()) + ", " + Region.getRegionNameById(customers.get(position).getRegionL4());
-        viewHolder.tvAddressCustomer.setText(diachi);
-        viewHolder.tvPhoneCustomer.setText(customers.get(position).getPhone());
-        viewHolder.tvCountCustomer.setText("("+Customer.getInvoiceCountById(customers.get(position).getId())+")");
+        viewHolder.tvNameCustomer.setText(c.getCustomerName());
 
-        //region Multidelete
+        String diachi = c.getAddress() + ", " + Region.getRegionNameById(c.getRegionL5()) + ", " + Region.getRegionNameById(c.getRegionL4());
+        if (c.getAddress().isEmpty()) {
+            diachi = Region.getRegionNameById(c.getRegionL5()) + ", " + Region.getRegionNameById(c.getRegionL4());
+        }
+        viewHolder.tvAddressCustomer.setText(diachi);
+
+        viewHolder.tvPhoneCustomer.setText(ValidationHelper.getViFormatPhone(c.getPhone()));
+
+        viewHolder.tvCountCustomer.setText("(" + Customer.getInvoiceCountById(c.getId()) + ")");
+
+        //region --DialCall_SendMessage--
+
+        viewHolder.btnDialCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+                dialIntent.setData(Uri.parse("tel:" + ValidationHelper.getValidFormatPhone(c.getPhone())));
+                context.startActivity(dialIntent);
+            }
+        });
+
+        viewHolder.btnSendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setData(Uri.parse("sms:"+ValidationHelper.getValidFormatPhone(c.getPhone())));
+                context.startActivity(sendIntent);
+            }
+        });
+
+        //endregion
+
+        //region --Multidelete--
         viewHolder.chkSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

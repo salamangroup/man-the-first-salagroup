@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.salagroup.salaman.R;
 import com.salagroup.salaman.adapter.CustomerGroupAdapter;
+import com.salagroup.salaman.helper.Constant;
 import com.salagroup.salaman.helper.ValidationHelper;
 import com.salagroup.salaman.pojo.Customer;
 import com.salagroup.salaman.pojo.CustomerGroup;
@@ -59,6 +60,7 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
         FloatingActionButton fabAddCustomerGroup = (FloatingActionButton) getActivity().findViewById(R.id.fabAddCustomerGroup);
 
         mAdapter = new CustomerGroupAdapter(mContext, CustomerGroup.getAllActive());
+        mNotifyDataSetChanged();
         lvCustomerGroup.setAdapter(mAdapter);
 
         fabAddCustomerGroup.setOnClickListener(this);
@@ -74,12 +76,22 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
         lvCustomerGroup.setOnItemClickListener(this);
     }
 
+    private void mNotifyDataSetChanged() {
+
+        List<CustomerGroup> customerGroups = CustomerGroup.getAllActive();
+        CustomerGroup cg = new CustomerGroup();
+        cg.setCustomerGroupName("- Không nhóm -");
+        customerGroups.add(0, cg);
+        mAdapter.setModel(customerGroups);
+        mAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fabAddCustomerGroup:
 
-                showDialogInsertUpdate(false);
+                showDialogInsertUpdate(Constant.Statement.IS_INSERTING);
 
             case R.id.fabAddCustomer:
                 break;
@@ -89,37 +101,39 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
     @Override
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-        PopupMenu popup = new PopupMenu(mContext, view);
-        popup.getMenuInflater().inflate(R.menu.popup_menu_customergroup, popup.getMenu());
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
+        if (position != 0) {
 
-                mPos = position;
+            PopupMenu popup = new PopupMenu(mContext, view);
+            popup.getMenuInflater().inflate(R.menu.popup_menu_customergroup, popup.getMenu());
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
 
-                switch (item.getItemId()) {
+                    mPos = position;
 
-                    case R.id.action_popup_update:
+                    switch (item.getItemId()) {
 
-                        showDialogInsertUpdate(true);
+                        case R.id.action_popup_update:
 
-                        return true;
+                            showDialogInsertUpdate(Constant.Statement.IS_UPDATETING);
 
-                    case R.id.action_popup_delete:
+                            return true;
 
-                        showDialogDelete();
+                        case R.id.action_popup_delete:
 
-                        return true;
+                            showDialogDelete();
+
+                            return true;
+                    }
+
+                    return false;
                 }
-
-                return false;
-            }
-        });
-        popup.show();//showing popup menu
-
+            });
+            popup.show();//showing popup menu
+        }
     }
 
-    private void showDialogInsertUpdate(boolean isUpdating) {
+    private void showDialogInsertUpdate(final int mState) {
 
         cg = new CustomerGroup();
 
@@ -129,10 +143,10 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
 
         edtCustomerGroup = (EditText) mDialog.findViewById(R.id.edtCustomerGroup);
         edtCustomerGroup.setSingleLine();
-        ValidationHelper.addValidSpacesTextChanged(edtCustomerGroup);
+        ValidationHelper.addValidNameSpacesTextChanged(edtCustomerGroup);
         //TODO xử lý tên nhóm nhập vào
 
-        if (isUpdating) {
+        if (mState == Constant.Statement.IS_UPDATETING) {
 
             cg = CustomerGroup.getCustomerGroupById(mAdapter.customerGroups.get(mPos).getId());
             edtCustomerGroup.setText(cg.getCustomerGroupName());
@@ -157,14 +171,21 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
 
                             String name = edtCustomerGroup.getText().toString();
                             cg.setCustomerGroupName(name);
+                            //TODO cg.setShopID
                             cg.setStatus(true);
                             cg.save();
 
-                            mAdapter.setModel(CustomerGroup.getAllActive());
-                            mAdapter.notifyDataSetChanged();
+                            mNotifyDataSetChanged();
 
-                            Snackbar.make(customerGroupLayout, "Cập nhật thành công",
-                                    Snackbar.LENGTH_LONG).show();
+                            if(mState == Constant.Statement.IS_INSERTING){
+
+                                Snackbar.make(customerGroupLayout, "Thêm nhóm thành công",
+                                        Snackbar.LENGTH_LONG).show();
+                            }else {
+
+                                Snackbar.make(customerGroupLayout, "Cập nhật thành công",
+                                        Snackbar.LENGTH_LONG).show();
+                            }
 
                             mAlertDialog.dismiss();
                         }
@@ -178,7 +199,6 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
     private boolean checkInput() {
 
         String name = edtCustomerGroup.getText().toString().trim();
-        name = ValidationHelper.getValidSpacesString(name);
         if (name.length() == 0) {
 
             edtCustomerGroup.setError("Vui lòng nhập tên nhóm!");
@@ -223,8 +243,7 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
                             undoIds.add(c.getId());
                         }
 
-                        mAdapter.setModel(CustomerGroup.getAllActive());
-                        mAdapter.notifyDataSetChanged();
+                        mNotifyDataSetChanged();
 
 //                                                final Thread mThread = new Thread(new Runnable() {
 //                                                    @Override
@@ -266,8 +285,7 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
                                             c.save();
                                         }
 
-                                        mAdapter.setModel(CustomerGroup.getAllActive());
-                                        mAdapter.notifyDataSetChanged();
+                                        mNotifyDataSetChanged();
                                     }
                                 })
                                 .show();

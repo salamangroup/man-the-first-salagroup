@@ -47,6 +47,9 @@ public class CustomerGroupAdapter extends ArrayAdapter<CustomerGroup> {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+
+        CustomerGroup cg = customerGroups.get(position);
+
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -59,8 +62,12 @@ public class CustomerGroupAdapter extends ArrayAdapter<CustomerGroup> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tvNameCustomerGroup.setText(customerGroups.get(position).getCustomerGroupName());
-        viewHolder.tvCountCustomerGroup.setText("("+CustomerGroup.getCustomerCountById(customerGroups.get(position).getId())+")");
+        viewHolder.tvNameCustomerGroup.setText(cg.getCustomerGroupName());
+        if(position==0){
+            viewHolder.tvCountCustomerGroup.setText("("+CustomerGroup.getCustomerCountById(0)+")");
+        }else {
+            viewHolder.tvCountCustomerGroup.setText("("+CustomerGroup.getCustomerCountById(cg.getId())+")");
+        }
         return convertView;
     }
 }
