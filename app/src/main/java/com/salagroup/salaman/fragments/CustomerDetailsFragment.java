@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -24,6 +26,7 @@ import com.salagroup.salaman.adapter.CustomerGroupSpinnerAdapter;
 import com.salagroup.salaman.adapter.MyRegionAdapter;
 import com.salagroup.salaman.customview.CustomSpinner;
 import com.salagroup.salaman.helper.Constant;
+import com.salagroup.salaman.helper.SystemInfoHelper;
 import com.salagroup.salaman.helper.ValidationHelper;
 import com.salagroup.salaman.pojo.Customer;
 import com.salagroup.salaman.pojo.CustomerGroup;
@@ -46,6 +49,9 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
     private DatePicker dpkBirthday;
     private RadioGroup rdgGenderType;
     private Button btnCusDetailCancel, btnCusDetailDelete, btnCusDetailUpdate;
+    private ImageButton btnAddGroup;
+
+    private EditText edtCustomerGroup;
 
     private Context mContext;
     private MyRegionAdapter provincialsAdapter;
@@ -53,7 +59,8 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
     private CustomerGroupSpinnerAdapter cgSpinnerAdapter;
     private long _id;
 
-    private static final int MINIMUM_BIRTH_YEAR = Calendar.getInstance().get(Calendar.YEAR) - 16;
+    private static final int MAX_BIRTH_YEAR = Calendar.getInstance().get(Calendar.YEAR) - 13;
+    private static final int MIN_BIRTH_YEAR = Calendar.getInstance().get(Calendar.YEAR) - 100;
 
     private int mState;
 
@@ -74,7 +81,7 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
         spnCustomerGroup = (Spinner) view.findViewById(R.id.spnCustomerGroup);
 
         dpkBirthday = (DatePicker) view.findViewById(R.id.dpkBirthday);
-        dpkBirthday.updateDate(MINIMUM_BIRTH_YEAR, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        dpkBirthday.updateDate(MAX_BIRTH_YEAR, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
         rdgGenderType = (RadioGroup) view.findViewById(R.id.rdgGenderType);
         rdgGenderType.check(R.id.rdbMale);
@@ -83,8 +90,10 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
         btnCusDetailDelete = (Button) view.findViewById(R.id.btnCusDetailDelete);
         btnCusDetailUpdate = (Button) view.findViewById(R.id.btnCusDetailUpdate);
 
+        btnAddGroup = (ImageButton) view.findViewById(R.id.btnAddGroup);
+
         ValidationHelper.addValidNameSpacesTextChanged(edtCustomerName);
-        ValidationHelper.addViPhoneTextChanged(edtCustomerPhone);
+        ValidationHelper.addViMoneyTextChanged(edtCustomerPhone);
         ValidationHelper.addValidNameSpacesTextChanged(edtAddress);
 
         return view;
@@ -96,9 +105,9 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
         mContext = this.getActivity();
 
         _id = getArguments().getLong("id");
-        if(_id==-1){
+        if (_id == -1) {
             mState = Constant.Statement.IS_INSERTING;
-        }else {
+        } else {
             mState = Constant.Statement.IS_UPDATETING;
         }
 
@@ -109,19 +118,14 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
         btnCusDetailDelete.setOnClickListener(this);
         btnCusDetailUpdate.setOnClickListener(this);
 
+        btnAddGroup.setOnClickListener(this);
+
         initTinhThanh();
-//        initQuanHuyen(0);
         spnProvincials.setOnItemSelectedListener(this);
+        initQuanHuyen(0);
         spnDistricts.setOnItemSelectedListener(this);
 
-        List<CustomerGroup> customerGroups = CustomerGroup.getAllActive();
-        CustomerGroup cg = new CustomerGroup();
-        cg.setCustomerGroupName("- Không nhóm -");
-        customerGroups.add(0, cg);
-        cgSpinnerAdapter = new CustomerGroupSpinnerAdapter(mContext, customerGroups);
-        spnCustomerGroup.setAdapter(cgSpinnerAdapter);
-
-        if (mState == Constant.Statement.IS_INSERTING ) {
+        if (mState == Constant.Statement.IS_INSERTING) {
 
             btnCusDetailDelete.setVisibility(View.GONE);
             btnCusDetailUpdate.setText("Lưu");
@@ -132,25 +136,31 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
             edtCustomerName.setText(c.getCustomerName());
             edtCustomerName.setSelection(c.getCustomerName().length());
 
-            edtCustomerPhone.setText(c.getPhone());
+            edtCustomerPhone.setText(ValidationHelper.getViFormatPhone(c.getPhone()));
 
-            for (int i = 0; i < provincialsAdapter.regions.size(); i++) {
+            if (c.getRegionL4() != 0) {
 
-                if (provincialsAdapter.regions.get(i).getId() == c.getRegionL4()) {
+                for (int i = 0; i < provincialsAdapter.regions.size(); i++) {
 
-                    spnProvincials.setSelection(i);
-                    initQuanHuyen(provincialsAdapter.regions.get(i).getId());
-                    break;
+                    if (provincialsAdapter.regions.get(i).getId() == c.getRegionL4()) {
+
+                        spnProvincials.setSelection(i);
+                        initQuanHuyen(provincialsAdapter.regions.get(i).getId());
+                        break;
+                    }
                 }
-            }
-//            for (int i = 0; i < districtsAdapter.regions.size(); i++) {
+//                if(c.getRegionL5()!=0){
+//                    for (int i = 0; i < districtsAdapter.regions.size(); i++) {
 //
-//                if (districtsAdapter.regions.get(i).getId() == c.getRegionL5()) {
+//                        if (districtsAdapter.regions.get(i).getId() == c.getRegionL5()) {
 //
-//                    spnDistricts.setSelection(i);
-//                    break;
+//                            spnDistricts.setSelection(i);
+//                            break;
+//                        }
+//                    }
 //                }
-//            }
+            }
+
             edtAddress.setText(c.getAddress());
 
             StringTokenizer tokenizer = new StringTokenizer(c.getBirthday(), "-");
@@ -170,16 +180,9 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
                     rdgGenderType.check(R.id.rdbOther);
                     break;
             }
-
-            for (int i = 1; i < cgSpinnerAdapter.getCount(); i++) {
-
-                if (cgSpinnerAdapter.getItem(i).getId() == c.getCustomerGroupID()) {
-
-                    spnCustomerGroup.setSelection(i);
-                    break;
-                }
-            }
         }
+
+        initCustomerGroup();
     }
 
     @Override
@@ -190,7 +193,7 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
             case R.id.spnProvincials:
 
                 try {
-                    long parentId = provincialsAdapter.getItem(position).getId();
+                    long parentId = provincialsAdapter.regions.get(position).getId();
                     initQuanHuyen(parentId);
                 } catch (Exception ex) {
                     initQuanHuyen(0);
@@ -211,6 +214,28 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    private void initCustomerGroup() {
+
+        List<CustomerGroup> customerGroups = CustomerGroup.getAllActive();
+        CustomerGroup cg = new CustomerGroup();
+        cg.setCustomerGroupName("- Không nhóm -");
+        customerGroups.add(0, cg);
+        cgSpinnerAdapter = new CustomerGroupSpinnerAdapter(mContext, customerGroups);
+        spnCustomerGroup.setAdapter(cgSpinnerAdapter);
+
+        if (mState == Constant.Statement.IS_UPDATETING) {
+
+            for (int i = 1; i < cgSpinnerAdapter.getCount(); i++) {
+
+                if (cgSpinnerAdapter.getItem(i).getId() == Customer.getCustomerById(_id).getCustomerGroupID()) {
+
+                    spnCustomerGroup.setSelection(i);
+                    break;
+                }
+            }
+        }
     }
 
     private void initTinhThanh() {
@@ -239,12 +264,14 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
             if (_id != -1) {
 
                 Customer c = Customer.getCustomerById(_id);
-                for (int i = 0; i < districtsAdapter.regions.size(); i++) {
+                if (c.getRegionL5() != 0 && c.getRegionL4() == parentId) {
+                    for (int i = 0; i < districtsAdapter.regions.size(); i++) {
 
-                    if (districtsAdapter.regions.get(i).getId() == c.getRegionL5()) {
+                        if (districtsAdapter.regions.get(i).getId() == c.getRegionL5()) {
 
-                        spnDistricts.setSelection(i);
-                        break;
+                            spnDistricts.setSelection(i);
+                            break;
+                        }
                     }
                 }
             }
@@ -304,14 +331,21 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
                     c.setCustomerName(edtCustomerName.getText().toString().trim());
 
                     c.setPhone(ValidationHelper.getValidFormatPhone(edtCustomerPhone.getText().toString()));
+                    try {
+                        long regionL4Id = provincialsAdapter.getItem(spnProvincials.getSelectedItemPosition()).getId();
+                        c.setRegionL4(regionL4Id);
+                    } catch (NullPointerException ex) {
+                        c.setRegionL4(0);
+                    }
+                    try {
+                        long regionL5Id = districtsAdapter.getItem(spnDistricts.getSelectedItemPosition()).getId();
+                        c.setRegionL5(regionL5Id);
+                    } catch (NullPointerException ex) {
+                        c.setRegionL5(0);
+                    }
 
-                    long regionL4Id = provincialsAdapter.getItem(spnProvincials.getSelectedItemPosition()).getId();
-                    c.setRegionL4(regionL4Id);
-                    long regionL5Id = districtsAdapter.getItem(spnDistricts.getSelectedItemPosition()).getId();
-                    c.setRegionL5(regionL5Id);
                     String address = edtAddress.getText().toString().trim();
                     c.setAddress(address);
-
 
 //                    String day = String.valueOf(dpkBirthday.getDayOfMonth());
 //                    day = day.length() <= 1 ? "0" + day : day;
@@ -353,6 +387,13 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
                     String createdDatetime = createdFormat.format(createdDate);
                     c.setCreatedDateTime(createdDatetime);
 
+                    //TODO c.setNote(); c.setEmail(); c.setCreatedBy(); c.setLastUpdatedBy(); c.setUserID(); c.setShopID();
+                    if (mState == Constant.Statement.IS_INSERTING) {
+                        c.setCreatedDateTime(SystemInfoHelper.getCurrentDatetime(true));
+                    } else {
+                        c.setLastUpdatedDateTime(SystemInfoHelper.getCurrentDatetime(true));
+                    }
+
                     c.setStatus(true);
 
                     c.save();
@@ -361,13 +402,73 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
                 }
 
                 break;
+            case R.id.btnAddGroup:
+
+                showDialogInsertCustomerGroup();
+
+                break;
         }
+    }
+
+    public void showDialogInsertCustomerGroup() {
+
+        final CustomerGroup cg = new CustomerGroup();
+
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        View mDialog = inflater.inflate(R.layout.dialog_add_group_customer,
+                (ViewGroup) getActivity().findViewById(R.id.dialog_add_customer_group));
+
+        edtCustomerGroup = (EditText) mDialog.findViewById(R.id.edtCustomerGroup);
+        edtCustomerGroup.setSingleLine();
+        ValidationHelper.addValidNameSpacesTextChanged(edtCustomerGroup);
+        //TODO xử lý tên nhóm nhập vào
+
+        final AlertDialog mAlertDialog = new AlertDialog.Builder(mContext)
+                .setView(mDialog)
+                .setNegativeButton(getString(R.string.btn_customer_group_cancel), null)
+                .setPositiveButton(getString(R.string.btn_customer_group_save), null)
+                .create();
+        mAlertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+
+                Button mPositiveButton = mAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                mPositiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String name = edtCustomerGroup.getText().toString().trim();
+
+                        if (name.length() > 0) {
+
+                            cg.setCustomerGroupName(name);
+                            //TODO cg.setShopID cg.setCode(); cg.setCreatedBy(); cg.setLastUpdatedBy(); cg.setNote();
+                            cg.setStatus(true);
+
+                            cg.setCreatedDateTime(SystemInfoHelper.getCurrentDatetime(true));
+
+                            Snackbar.make(customerDetailsLayout, "Thêm nhóm thành công",
+                                    Snackbar.LENGTH_LONG).show();
+
+                            cg.save();
+
+                            initCustomerGroup();
+
+                            mAlertDialog.dismiss();
+                        } else {
+
+                            edtCustomerGroup.setError("Vui lòng nhập tên nhóm");
+                        }
+                    }
+                });
+            }
+        });
+        mAlertDialog.show();
     }
 
     private boolean checkInput() {
 
         String customerName = edtCustomerName.getText().toString().trim();
-        StringTokenizer nameTokenizer = new StringTokenizer(customerName, " ");
         String customerPhone = ValidationHelper.getValidFormatPhone(edtCustomerPhone.getText().toString());
         String customerAddress = edtAddress.getText().toString().trim();
 
@@ -376,8 +477,13 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
 //            edtCustomerName.requestFocus();
 //            return false;
 //        }
+        if (customerName.isEmpty()) {
+            edtCustomerName.setError("Vui lòng nhập tên khách hàng!");
+            edtCustomerName.requestFocus();
+            return false;
+        }
         if (!ValidationHelper.checkViHumanNameString(customerName)) {
-            edtCustomerName.setError("Vui lòng nhập tên khách hàng không có chữ số và ký tự đặc biệt");
+            edtCustomerName.setError("Vui lòng nhập tên khách hàng không có ký tự đặc biệt");
             edtCustomerName.requestFocus();
             return false;
         }
@@ -387,22 +493,23 @@ public class CustomerDetailsFragment extends Fragment implements View.OnClickLis
             edtCustomerPhone.requestFocus();
             return false;
         }
-        try {
-            long id = provincialsAdapter.regions.get(spnProvincials.getSelectedItemPosition()).getId();
-        } catch (Exception ex) {
-            Snackbar.make(customerDetailsLayout, "Vui lòng chọn Tỉnh / Thành", Snackbar.LENGTH_LONG).show();
-            spnProvincials.requestFocus();
-            return false;
+        if (customerAddress.length() > 0) {
+            try {
+                long id = provincialsAdapter.regions.get(spnProvincials.getSelectedItemPosition()).getId();
+            } catch (Exception ex) {
+                Snackbar.make(customerDetailsLayout, "Vui lòng chọn Tỉnh / Thành", Snackbar.LENGTH_LONG).show();
+                spnProvincials.requestFocus();
+                return false;
+            }
         }
-//        if (customerAddress.isEmpty()) {
-//
-//            edtAddress.setError("Vui lòng nhập địa chỉ (tên đường, thôn, ấp, phường, xã...)");
-//            edtAddress.requestFocus();
-//            return false;
-//        }
-        if (dpkBirthday.getYear() > MINIMUM_BIRTH_YEAR) {
+        if (dpkBirthday.getYear() > MAX_BIRTH_YEAR) {
 
-            Snackbar.make(customerDetailsLayout, "Vui lòng chọn năm sinh trước " + (MINIMUM_BIRTH_YEAR + 1), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(customerDetailsLayout, "Vui lòng chọn năm sinh trước " + (MAX_BIRTH_YEAR + 1), Snackbar.LENGTH_LONG).show();
+            dpkBirthday.requestFocus();
+            return false;
+        } else if (dpkBirthday.getYear() <= MIN_BIRTH_YEAR) {
+
+            Snackbar.make(customerDetailsLayout, "Vui lòng chọn năm sinh sau " + MIN_BIRTH_YEAR, Snackbar.LENGTH_LONG).show();
             dpkBirthday.requestFocus();
             return false;
         }

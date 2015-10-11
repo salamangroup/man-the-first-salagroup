@@ -1,5 +1,13 @@
 package com.salagroup.salaman.helper;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Paint;
+
+import com.salagroup.salaman.R;
+
+import java.lang.reflect.Field;
+
 /**
  * Created by Leon on 03/10/2015.
  */
@@ -21,4 +29,5 @@ public class Constant {
     public static final String ALPHABET_CHARACTERS = "A-Z";
     public static final String DIGITS = "0-9";
     public static final String ALLOW_SYMBOLS = " _-";
+
 }
