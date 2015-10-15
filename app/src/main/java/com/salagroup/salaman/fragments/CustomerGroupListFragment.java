@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.salagroup.salaman.R;
 import com.salagroup.salaman.adapter.CustomerGroupAdapter;
 import com.salagroup.salaman.helper.Constant;
+import com.salagroup.salaman.helper.SystemInfoHelper;
 import com.salagroup.salaman.helper.ValidationHelper;
 import com.salagroup.salaman.pojo.Customer;
 import com.salagroup.salaman.pojo.CustomerGroup;
@@ -169,23 +170,28 @@ public class CustomerGroupListFragment extends Fragment implements View.OnClickL
 
                         if (checkInput()) {
 
-                            String name = edtCustomerGroup.getText().toString();
+                            String name = edtCustomerGroup.getText().toString().trim();
                             cg.setCustomerGroupName(name);
-                            //TODO cg.setShopID
+                            //TODO cg.setShopID cg.setCode(); cg.setCreatedBy(); cg.setLastUpdatedBy(); cg.setNote();
                             cg.setStatus(true);
-                            cg.save();
-
-                            mNotifyDataSetChanged();
 
                             if(mState == Constant.Statement.IS_INSERTING){
+
+                                cg.setCreatedDateTime(SystemInfoHelper.getCurrentDatetime(true));
 
                                 Snackbar.make(customerGroupLayout, "Thêm nhóm thành công",
                                         Snackbar.LENGTH_LONG).show();
                             }else {
 
+                                cg.setLastUpdatedDateTime(SystemInfoHelper.getCurrentDatetime(true));
+
+
                                 Snackbar.make(customerGroupLayout, "Cập nhật thành công",
                                         Snackbar.LENGTH_LONG).show();
                             }
+
+                            cg.save();
+                            mNotifyDataSetChanged();
 
                             mAlertDialog.dismiss();
                         }

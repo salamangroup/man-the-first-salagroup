@@ -90,11 +90,15 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
 
         viewHolder.tvNameCustomer.setText(c.getCustomerName());
 
-        String diachi = c.getAddress() + ", " + Region.getRegionNameById(c.getRegionL5()) + ", " + Region.getRegionNameById(c.getRegionL4());
-        if (c.getAddress().isEmpty()) {
-            diachi = Region.getRegionNameById(c.getRegionL5()) + ", " + Region.getRegionNameById(c.getRegionL4());
+        if (c.getRegionL4() != 0) {
+            String diachi = c.getAddress() + ", " + Region.getRegionNameById(c.getRegionL5()) + ", " + Region.getRegionNameById(c.getRegionL4());
+            if (c.getAddress().isEmpty()) {
+                diachi = Region.getRegionNameById(c.getRegionL5()) + ", " + Region.getRegionNameById(c.getRegionL4());
+            }
+            viewHolder.tvAddressCustomer.setText(diachi);
+        } else {
+            viewHolder.tvAddressCustomer.setText("");
         }
-        viewHolder.tvAddressCustomer.setText(diachi);
 
         viewHolder.tvPhoneCustomer.setText(ValidationHelper.getViFormatPhone(c.getPhone()));
 
@@ -107,7 +111,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
             public void onClick(View v) {
 
                 Intent dialIntent = new Intent(Intent.ACTION_DIAL);
-                dialIntent.setData(Uri.parse("tel:" + ValidationHelper.getValidFormatPhone(c.getPhone())));
+                dialIntent.setData(Uri.parse("tel:" + c.getPhone()));
                 context.startActivity(dialIntent);
             }
         });
@@ -117,7 +121,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
             public void onClick(View v) {
 
                 Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                sendIntent.setData(Uri.parse("sms:"+ValidationHelper.getValidFormatPhone(c.getPhone())));
+                sendIntent.setData(Uri.parse("sms:" + ValidationHelper.getValidFormatPhone(c.getPhone())));
                 context.startActivity(sendIntent);
             }
         });

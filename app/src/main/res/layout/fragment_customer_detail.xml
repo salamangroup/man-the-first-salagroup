@@ -73,6 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/store_info_item_address"
+                android:maxLength="100"
                 android:inputType="textMultiLine"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin" />
@@ -153,6 +154,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginTop="@dimen/activity_vertical_margin">
 
                 <TextView
@@ -162,11 +164,27 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#33b5e5" />
 
-                <Spinner
-                    android:id="@+id/spnCustomerGroup"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="@dimen/activity_horizontal_margin" />
+                    android:layout_height="match_parent">
+
+                    <Spinner
+                        android:id="@+id/spnCustomerGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/btnAddGroup"
+                        android:layout_toStartOf="@+id/btnAddGroup" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:drawable/ic_input_add"
+                        android:id="@+id/btnAddGroup"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+                </RelativeLayout>
+
             </LinearLayout>
 
         </LinearLayout>
