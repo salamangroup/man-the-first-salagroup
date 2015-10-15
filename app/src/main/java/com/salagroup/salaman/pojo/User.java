@@ -3,66 +3,108 @@ package com.salagroup.salaman.pojo;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
+import com.google.gson.annotations.Expose;
 
 @Table(name = "T00_User", id = "_id")
 public class User extends Model {
 
+    @Column(name = "Status")
+    @Expose
+    public int status;
     @Column(name = "Code")
+    @Expose
     private String code;
     @Column(name = "UserName")
+    @Expose
     private String username;
     @Column(name = "Password")
+    @Expose
     private String password;
     @Column(name = "DisplayName")
+    @Expose
     private String displayName;
     @Column(name = "Gender")
+    @Expose
     private int gender;
     @Column(name = "Birthday")
+    @Expose
     private String birthDay;
     @Column(name = "Email")
+    @Expose
     private String email;
     @Column(name = "Phone")
+    @Expose
     private String phone;
     @Column(name = "Address")
+    @Expose
     private String address;
     @Column(name = "LastLogin")
+    @Expose
     private String lastLogin;
     @Column(name = "DeviceToken")
+    @Expose
     private String deviceToken;
     @Column(name = "FacebookToken")
+    @Expose
     private String facebookToken;
     @Column(name = "FacebookID")
+    @Expose
     private String facebookID;
     @Column(name = "GoogleToken")
+    @Expose
     private String googleToken;
     @Column(name = "GoogleID")
+    @Expose
     private String googleId;
     @Column(name = "LastIP")
+    @Expose
     private String lastIP;
     @Column(name = "IsShop")
+    @Expose
     private boolean isShop;
     @Column(name = "Latitude")
+    @Expose
     private double latitude;
     @Column(name = "Longitude")
+    @Expose
     private double longitude;
     @Column(name = "SettingID")
+    @Expose
     private long settingID;
     @Column(name = "Note")
+    @Expose
     private String note;
-    @Column(name = "Status")
-    private boolean status;
     @Column(name = "CreatedBy")
+    @Expose
     private long createdBy;
     @Column(name = "CreatedDateTime")
+    @Expose
     private String createdDateTime;
     @Column(name = "LastUpdatedBy")
+    @Expose
     private long lastUpdatedBy;
     @Column(name = "LastUpdatedDateTime")
+    @Expose
     private String lastUpdatedDateTime;
 
     public User() {
         super();
-        this.status = true;
+    }
+
+    public User(String username, String password, String displayName, int gender, String birthDay, String email, String phone, String address) {
+        this.username = username;
+        this.password = password;
+        this.displayName = displayName;
+        this.gender = gender;
+        this.birthDay = birthDay;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public static User getUserById(int _id) {
+        return new Select().from(User.class).where("_id = ?", _id).executeSingle();
     }
 
     public String getCode() {
@@ -233,11 +275,11 @@ public class User extends Model {
         this.note = note;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
