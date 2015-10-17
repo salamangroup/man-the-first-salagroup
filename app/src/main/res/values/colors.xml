@@ -19,4 +19,31 @@
 
     <color name="light_blue">#03A9F4</color>
 
+    <item name="blue100" type="color">#BBDEFB</item>
+    <item name="blue200" type="color">#90CAF9</item>
+    <item name="blue300" type="color">#64B5F6</item>
+    <item name="blue400" type="color">#42A5F5</item>
+    <item name="blue500" type="color">#2196F3</item>
+    <item name="blue600" type="color">#1E88E5</item>
+    <item name="blue700" type="color">#1976D2</item>
+    <item name="blue800" type="color">#1565C0</item>
+    <item name="blue900" type="color">#0D47A1</item>
+
+    <item name="orange100" type="color">#FFCCBC</item>
+    <item name="orange200" type="color">#FFAB91</item>
+    <item name="orange300" type="color">#FF8A65</item>
+    <item name="orange400" type="color">#FF7043</item>
+    <item name="orange500" type="color">#FF5722</item>
+    <item name="orange600" type="color">#F4511E</item>
+    <item name="orange700" type="color">#E64A19</item>
+    <item name="orange800" type="color">#D84315</item>
+    <item name="orange900" type="color">#BF360C</item>
+
+    <item name="pink300" type="color">#F06292</item>
+    <item name="pink500" type="color">#EC407A</item>
+
+
+    <item name="white" type="color">#FFFFFF</item>
+    <item name="black" type="color">#000000</item>
+
 </resources>

@@ -1,9 +1,10 @@
 package com.salagroup.salaman.helper;
 
+import android.app.Activity;
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import java.util.regex.Matcher;
@@ -250,4 +251,17 @@ public class ValidationHelper {
             }
         });
     }
+
+    /**
+     * Hide KeyBoard when click outside EditText
+     *
+     * @param activity : Activity's EditText in
+     */
+    public static void hideKeyboard(Activity activity) {
+        if (activity != null && activity.getWindow() != null && activity.getWindow().getDecorView() != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0);
+        }
+    }
 }
+

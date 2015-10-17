@@ -14,7 +14,7 @@ public class SystemInfoHelper {
 
     /**
      *
-     * @param withTimezone
+     * @param withTimezone True if get TimeZone
      * @return "yyyy-MM-dd HH:mm:ss zzz" = "2015-10-03 19:30:00 GMT+7:00" or "yyyy-MM-dd HH:mm:ss" = "2015-10-03 19:30:00"
      */
     public static String getCurrentDatetime(boolean withTimezone) {
@@ -46,7 +46,7 @@ public class SystemInfoHelper {
 
     /**
      *
-     * @param format24h
+     * @param format24h True if get 24PM format
      * @return "HH:mm:ss" = "19:30:00" or "hh:mm:ss a" = "07:30:00 PM"
      */
     public static String getCurrenTime(boolean format24h) {

@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_add_customer_group"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/dialog_add_customer_group"
     android:orientation="vertical">
 
-    <EditText
-        android:layout_marginTop="10dp"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtCustomerGroup"
+            android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edtCustomerGroup"
+            android:layout_marginTop="10dp"
         android:hint="@string/title_fragment_customer_group"
         android:padding="10dp"/>
+
+    </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

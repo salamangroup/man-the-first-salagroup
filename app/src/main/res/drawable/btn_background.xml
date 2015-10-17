@@ -4,21 +4,21 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="2dp" />
-            <solid android:color="?attr/colorPrimaryDark" />
+            <solid android:color="@color/colorPrimaryDark" />
         </shape>
     </item>
 
     <item android:state_focused="true">
         <shape android:shape="rectangle">
             <corners android:radius="2dp" />
-            <solid android:color="?attr/colorPrimaryDark" />
+            <solid android:color="@color/colorPrimaryDark" />
         </shape>
     </item>
 
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="2dp" />
-            <solid android:color="?attr/colorPrimary" />
+            <solid android:color="@color/colorPrimary" />
         </shape>
     </item>
 </selector>
